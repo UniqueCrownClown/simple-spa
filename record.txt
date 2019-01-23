@@ -1,0 +1,77 @@
+
+https://www.jianshu.com/p/c0d759ef881b
+typeorm
+装饰器使用
+1. 怎么添加server 
+2. 添加websocket实现简单聊天室
+
+用nest重构？？
+
+
+用nodejs爬一下咪咕音乐源？？
+	怎么把react-music扒过来
+
+npm 源切换
+	npm set registry https://registry.npm.taobao.org/
+	npm set registry https://registry.npmjs.org
+全局安装nrm
+	nrm ls
+	nrm current
+	nrm use +name
+	添加私有源
+		nrm add qihoo http://registry.npm.360.org
+	测速
+		nrm test npm
+	删除私有源
+		nrm del qihoo
+
+
+netlify部署构建应用
+
+travis
+
+github+jenkins+nodejs+nginx
+
+
+
+无聊vltur一下
+	wget https://download.docker.com/linux/centos/7/x86_64/edge/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm   //下载相关软件包
+
+	yum -y install containerd.io-1.2.6-3.3.el7.x86_64.rpm　　　　//升级containerd.io软件包
+
+	sudo yum -y install docker-ce
+
+	sudo systemctl start docker
+
+	docker run hello-world
+
+	周末在宿舍一定要搞通
+
+	搭建mysql的镜像
+		docker pull mysql:5.7
+		根据镜像起一个新的容器
+		docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
+		直接起容器
+		docker start
+		mySqls数据目录
+				/root/mySqlDir
+
+		docker exec -it a4c091dd1071 /bin/bash
+
+		退出: exit
+
+		在dockerFile的目录下运行 docker build -t test .
+		-t 是给镜像命名 ，test是生成镜像的名字，. 是基于当前目录的Dockerfile来构建镜像。
+
+
+
+		写完 Dockerfile 文件还要执行命令打包成 image 镜像，还需要运行起容器，两行代码虽然不多但每次写还是麻烦，把它封装成一个 sh 脚本，每次直接运行脚本省时省力。
+
+
+typescript如何声明递归类型 
+
+音乐api后台
+	https://binaryify.github.io/NeteaseCloudMusicApi/#/
+	参考D:\webspace\clown\others\coexisting-vue-microfrontends把它做成一个tab加载框架？？
+
+	qube

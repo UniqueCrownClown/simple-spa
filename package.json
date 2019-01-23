@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "antd": "^3.11.6",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "axios": "^0.18.0",
+    "md5": "^2.2.1",
+    "moment": "^2.23.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts-antd": "2.17.0"
   },
@@ -16,10 +20,14 @@
     "eject": "react-scripts-ts-antd eject"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/jest": "^23.3.11",
+    "@types/md5": "^2.1.33",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.12",
+    "@types/react-router-dom": "^4.3.1",
     "typescript": "^3.2.2"
   }
 }

@@ -1,5 +1,14 @@
 {
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    // 声明interface是否需要首字母为大写的I
+    "interface-name": [false, "never-prefix"],
+    // 需要按字母顺序引入模块
+    "ordered-imports": [false],
+    "object-literal-sort-keys": [false],
+    "no-console": false,
+    "jsx-no-lambda": false
+  },
   "linterOptions": {
     "exclude": [
       "config/**/*.js",

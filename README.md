@@ -1,3 +1,7 @@
+yarn upgrade xxx --latest更新包
+脚手架 react-scripts-ts-antd
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

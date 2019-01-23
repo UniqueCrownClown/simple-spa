@@ -1,0 +1,40 @@
+html,
+body {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.treasure-main {
+  text-align: center;
+  height:100vh;
+  flex-direction:column;
+  display: flex;
+  .treasure-header {
+    font-size: 24px;
+    color: skyblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255,255,255,.5);
+    height: 80px;
+    .treasure-header-title {
+      color: aliceblue;
+      font-weight: 700;
+      // margin:0;
+      padding:0 20px;
+    }
+  }
+  .main-container{
+    display: flex;
+    justify-content: center;
+    flex:1;
+    .left-side{
+      width: 256px;
+      height:100%;
+      background-color: #ffffff;
+    }
+    .right-side{
+      flex:1;
+      height:100%;
+    }
+  }
+}
