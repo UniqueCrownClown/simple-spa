@@ -41,12 +41,12 @@ class WriteMoment extends React.Component<Props, States> {
   public render() {
     return (
       <div className="writeMoment">
-        <div className="writeMoment-header">
+        {/* <div className="writeMoment-header">
           <Icon type="left" className="to-left-btn" onClick={() => {
             this.props.history.goBack();
           }} />
           <div>发表信息</div>
-        </div>
+        </div> */}
         <div>
           <Upload {...props1}>
             <Button>

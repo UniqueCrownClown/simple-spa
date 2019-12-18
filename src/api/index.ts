@@ -38,3 +38,12 @@ export const login = (params: URLSearchParams) =>
 // 用户注册
 export const register = (params: URLSearchParams) =>
   instance.post(`${URL}/api/user`, params);
+
+  const url = `node/musicList.json?timestamp=${Date.now()}`
+  export const getList = () =>
+  axios.get(url).catch(err=>{console.log(err)});
+
+  export const getLrc = (id:string) =>
+  axios.get(`node/musicLrc/${id}.json?timestamp=${Date.now()}`).catch(err=>{console.log(err)});
+
+  

@@ -1,7 +1,7 @@
 import * as React from "react";
 // BrowserRouter as Router(也可以用)
 import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { Drawer, Icon, Menu, Avatar } from "antd";
+import { Drawer, Icon, Menu, Avatar, Button } from "antd";
 import LifeClock from "../lifeClock/LifeClock";
 import Music from "../music/Music";
 import Moment from "../moment/Moment";
@@ -29,7 +29,8 @@ interface State {
   visible: boolean;
   current: string;
   leftMenu: IItem[],
-  topMenu: TopMenuItem[]
+  topMenu: TopMenuItem[],
+  collapsed: boolean
 }
 
 const { SubMenu } = Menu;
@@ -43,12 +44,13 @@ class Main extends React.Component<Props, State> {
             [{ id: '1-1', label: '1-1', link: '/main/moment' },
             { id: '1-2', label: '1-2', link: '/main/writemoment' }]
         },
-        { id: '2', label: '聊天', link: '/main/chat' },
-        { id: '3', label: '音乐', link: '/music' },
+        { id: '3', label: '音乐', link: '/' },
         { id: '4', label: '生辰', link: '/lifeClock' },
+        { id: '2', label: '聊天', link: '/main/chat' },
         { id: '5', label: '测试', link: '/test' },
         ],
-      topMenu: []
+      topMenu: [],
+      collapsed: true
     };
   }
   public render() {
@@ -75,6 +77,7 @@ class Main extends React.Component<Props, State> {
             closable={false}
             onClose={this.onClose}
             visible={this.state.visible}
+            width={200}
           >
             <div>
               <Avatar size={64} icon="user" />
@@ -84,25 +87,29 @@ class Main extends React.Component<Props, State> {
           </Drawer>
           <div className="main-container">
             <div className="left-side">
+              <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
+              </Button>
               <Menu
                 onClick={this.handleClick2}
-                style={{ width: 256 }}
                 defaultSelectedKeys={['1']}
                 mode="inline"
+                inlineCollapsed={this.state.collapsed}
               >
                 {leftMenu.map(item => {
                   return this.renderMenu(item)
                 })}
               </Menu>
             </div>
+            {/* exact参数，路由是否严格匹配 */}
             <div className="right-side">
               <Switch>
-                <Route path="/main/chat" component={ChatMain} />
+                <Route path="/main/chat" exact={true} component={ChatMain} />
                 <Route path="/lifeClock" exact={true} component={LifeClock} />
-                <Route path="/main/moment" component={Moment} />
-                <Route path="/main/writemoment" component={WriteMoment} />
-                <Route path="/music" component={Music} />
-                <Route path="/test" component={Test} />
+                <Route path="/main/moment" exact={true} component={Moment} />
+                <Route path="/main/writemoment" exact={true} component={WriteMoment} />
+                <Route path="/" component={Music} />
+                <Route path="/test" exact={true} component={Test} />
               </Switch>
             </div>
           </div>
@@ -116,6 +123,12 @@ class Main extends React.Component<Props, State> {
       visible: true
     });
   };
+
+  public toggleCollapsed = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
 
   public handleTogetInfo = () => {
     this.setState({
@@ -148,14 +161,14 @@ class Main extends React.Component<Props, State> {
       return (<SubMenu key={data.id} title={
         <span>
           {data.iconType ? <Icon type={data.iconType} /> : null}
-          <span>{data.label}</span>
+          <span style={{ width: 100, display: "inline-block" }}>{data.label}</span>
         </span>
       }>{data.children.map(item => {
         return this.renderMenu(item)
       })}</SubMenu>);
     } else {
       return (<Menu.Item key={data.id}>
-        {data.link ? <Link to={data.link}><Icon type="appstore" />{data.label}</Link> : {}}
+        {data.link ? <Link to={data.link}><Icon type="appstore" /><span style={{ width: 100, display: "inline-block" }}>{data.label}</span></Link> : {}}
       </Menu.Item>)
     }
   }

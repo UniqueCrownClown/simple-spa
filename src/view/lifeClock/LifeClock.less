@@ -1,8 +1,15 @@
-.shengchen_content{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  &>div{
-    height: 500px;
+.shengchen {
+  height: 100%;
+  overflow: auto;
+
+  .shengchen_content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &>div {
+      height: 500px;
+    }
   }
 }

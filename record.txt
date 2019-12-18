@@ -74,4 +74,5 @@ typescript如何声明递归类型
 	https://binaryify.github.io/NeteaseCloudMusicApi/#/
 	参考D:\webspace\clown\others\coexisting-vue-microfrontends把它做成一个tab加载框架？？
 
-	qube
+	
+	axios 读取本地json文件

@@ -1,6 +1,6 @@
 
 import {Component} from "react";
-import React from "react";
+import * as React from "react";
 interface Props {
   name: string;
   enthusiasmLevel?: number;

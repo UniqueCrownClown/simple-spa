@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button, Checkbox } from "antd";
 import { FormComponentProps } from "antd/lib/form";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
-import md5 from "md5";
+import * as md5 from "md5";
 import { login } from "../../api";
 import "./Login.less";
 interface States {

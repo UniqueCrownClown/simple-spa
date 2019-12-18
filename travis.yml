@@ -11,4 +11,8 @@ script:
   - npm run build
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t uniquecrownclown/hello-docker:1.0 .
+ language: node_js
+ script: true
+ 
+ 
   - docker push uniquecrownclown/hello-docker:1.0
