@@ -45,9 +45,9 @@ class Main extends React.Component<Props, State> {
             { id: '1-2', label: '1-2', link: '/main/writemoment' }]
         },
         { id: '3', label: '音乐', link: '/' },
-        { id: '4', label: '生辰', link: '/lifeClock' },
+        { id: '4', label: '生辰', link: '/main/lifeClock' },
         { id: '2', label: '聊天', link: '/main/chat' },
-        { id: '5', label: '测试', link: '/test' },
+        { id: '5', label: '测试', link: '/main/test' },
         ],
       topMenu: [],
       collapsed: true
@@ -79,11 +79,13 @@ class Main extends React.Component<Props, State> {
             visible={this.state.visible}
             width={200}
           >
-            <div>
-              <Avatar size={64} icon="user" />
+            <div className="drawer-content">
+              <div>
+                <Avatar size={64} icon="user" />
+              </div>
+              <div>设置</div>
+              <div>退出</div>
             </div>
-            <p>设置</p>
-            <p>退出</p>
           </Drawer>
           <div className="main-container">
             <div className="left-side">
@@ -105,11 +107,11 @@ class Main extends React.Component<Props, State> {
             <div className="right-side">
               <Switch>
                 <Route path="/main/chat" exact={true} component={ChatMain} />
-                <Route path="/lifeClock" exact={true} component={LifeClock} />
+                <Route path="/main/lifeClock" exact={true} component={LifeClock} />
                 <Route path="/main/moment" exact={true} component={Moment} />
                 <Route path="/main/writemoment" exact={true} component={WriteMoment} />
                 <Route path="/" component={Music} />
-                <Route path="/test" exact={true} component={Test} />
+                <Route path="/main/hello" exact={true} component={Test} />
               </Switch>
             </div>
           </div>

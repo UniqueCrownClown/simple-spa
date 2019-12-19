@@ -2,12 +2,10 @@ import { Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getList, getLrc } from 'src/api';
 import "./music.less";
-import { constants } from 'zlib';
 
 const Music = () => {
   const [songList, setSongList] = useState([{ songid: "1", title: "1", author: "1" }]);
   let myAudio;
-  let lyricList;
   useEffect(() => {
     // 在组件下一次重新渲染之后执行
     getList().then((res: any) => {
@@ -55,7 +53,6 @@ const Music = () => {
   };
   useEffect(() => {
     // 渲染完后才允许调用
-    myAudio.play();
     const ddd: any = new Date()
     myAudio.ontimeupdate = (event) => {
       console.log(event.target.currentTime);
@@ -138,7 +135,7 @@ const Music = () => {
             <img src={String((currentSong as any).pic)} alt="" />
           </div>
           <div className="music-lyric">
-            <ul id="unique-lyricList" ref={el => { lyricList = el }}>{
+            <ul id="unique-lyricList">{
               playing.lrcData.map((item, index) => (<li key={item.locate + item.type} className={item.type ? "active" : null}>{item.content}</li>))
             }</ul>
           </div>

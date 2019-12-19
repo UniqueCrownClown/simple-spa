@@ -36,7 +36,6 @@ body {
   height: 100vh;
   flex-direction: column;
   display: flex;
-
   .treasure-header {
     font-size: 24px;
     color: skyblue;
@@ -66,6 +65,17 @@ body {
     .right-side {
       flex: 1;
       height: 100%;
+    }
+  }
+}
+
+.drawer-content{
+  text-align: center;
+  &>div{
+    margin:10px 0;
+    cursor: pointer;
+    &:hover{
+      opacity: .5;
     }
   }
 }

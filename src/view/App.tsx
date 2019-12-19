@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./main/Main";
-import Test from "../containers/Test";
+import Test from "./../containers/Test";
 import Register from "./register/Register";
 import Login from "./login/Login";
 class App extends React.Component {
@@ -14,7 +14,7 @@ class App extends React.Component {
             <Route path="/" exact={true} component={Main} />
             <Route path="/register" component={Register} />
             <Route path="/login" exact={true} component={Login} />
-            <Route path="/test" component={Test} />
+            <Route path="/test" exact={true} component={Test} />
           </Switch>
         </div>
       </Router>
