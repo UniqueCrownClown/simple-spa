@@ -3,39 +3,43 @@ body {
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 }
 
-::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 10px;
-  /*高宽分别对应横竖滚动条的尺寸*/
-  height: 1px;
+@media screen and (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 10px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background-color: skyblue;
+    background-image: -webkit-linear-gradient(45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent);
+  }
+
+  ::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #ededed;
+    border-radius: 10px;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  background-color: skyblue;
-  background-image: -webkit-linear-gradient(45deg,
-      rgba(255, 255, 255, 0.2) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.2) 75%,
-      transparent 75%,
-      transparent);
-}
-
-::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: #ededed;
-  border-radius: 10px;
-}
 
 .treasure-main {
   text-align: center;
   height: 100vh;
   flex-direction: column;
   display: flex;
+
   .treasure-header {
     font-size: 24px;
     color: skyblue;
@@ -44,6 +48,7 @@ body {
     align-items: center;
     background-color: rgba(255, 255, 255, .5);
     height: 60px;
+
     .treasure-header-title {
       color: aliceblue;
       font-weight: 700;
@@ -57,9 +62,17 @@ body {
     justify-content: center;
     flex: 1;
     height: calc(~"100vh - 60px");
+
     .left-side {
       height: 100%;
       background-color: #ffffff;
+    }
+
+    @media screen and (max-width: 875px) {
+      .left-side {
+        width: 0;
+        display: none;
+      }
     }
 
     .right-side {
@@ -69,12 +82,14 @@ body {
   }
 }
 
-.drawer-content{
+.drawer-content {
   text-align: center;
-  &>div{
-    margin:10px 0;
+
+  &>div {
+    margin: 10px 0;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
       opacity: .5;
     }
   }

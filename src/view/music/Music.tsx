@@ -1,21 +1,35 @@
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getList, getLrc } from 'src/api';
 import "./music.less";
+import Progress from 'src/components/progress/progress';
 
 const Music = () => {
-  const [songList, setSongList] = useState([{ songid: "1", title: "1", author: "1" }]);
-  let myAudio;
+  const [songList, setSongList] = useState([{ songid: "", title: "", author: "" }]);
+  const [currentSong, setcurrentSong] = useState({ songid: "1", title: "1", author: "1" });
+  const playSong = (event: any, songid: string) => {
+    // 歌曲资源托管在码云上
+    console.log(songList)
+    setcurrentSong(songList.find(item => item.songid === songid))
+    // 显示歌词
+    lrc(songid);
+    // 播放歌曲
+    setcurrentState(true);
+  };
   useEffect(() => {
     // 在组件下一次重新渲染之后执行
     getList().then((res: any) => {
-      console.log(res);
       const hahaha23 = res.data.map(item => {
         item.show = true;
         item.url = `http://jaymusic.gitee.io/jaymusic${item.path}`
         return item
-      })
-      setSongList(hahaha23)
+      });
+      // 本地路径
+      hahaha23[0].url = `node/localMusic/a.mp3`
+      // 初始化自动播放
+      setSongList(hahaha23);
+      // setcurrentSong(hahaha23[0])
+      // lrc(hahaha23[0].songid);
     });
   }, []);
   const [playing, setPlaying] = useState({ lrcData: [] });
@@ -38,23 +52,11 @@ const Music = () => {
       setPlaying({ lrcData: hahahx })
     })
   };
-  const TestClick = () => {
-    // alert("test");
-    lrc("003OUlho2HcRHC");
-  };
-  const [currentSong, setcurrentSong] = useState({ songid: "1", title: "1", author: "1" });
-  const playSong = (event: any, songid: string) => {
-    // 歌曲资源托管在码云上
-    setcurrentSong(songList.find(item => item.songid === songid))
-    // 显示歌词
-    lrc(songid);
-    // 播放歌曲
-
-  };
   useEffect(() => {
     // 渲染完后才允许调用
+    const myAudio = document.getElementById("unique-audio");
     const ddd: any = new Date()
-    myAudio.ontimeupdate = (event) => {
+    myAudio.ontimeupdate = (event: any) => {
       console.log(event.target.currentTime);
       // let current: number = (new Date() as any) - ddd;
       // current = Math.round(current / 1000);
@@ -80,8 +82,10 @@ const Music = () => {
     myAudio.onended = () => {
       console.log("end");
       const index = songList.findIndex(item => item === currentSong);
-      const songid = songList[index + 1].songid;
-      playSong(event, songid)
+      if (index >= -1 && index < songList.length - 1) {
+        const songid = songList[index + 1].songid;
+        playSong(event, songid)
+      }
     };
     return () => {
       // 清除myAudio注册事件
@@ -106,7 +110,32 @@ const Music = () => {
     }
     return lrcObj
   };
-  const [currentShow, setcurrentShow] = useState(0);
+  const [currentState, setcurrentState] = useState(false);
+  const pauseClick = () => {
+    const myAudio = document.getElementById("unique-audio");
+    if ((myAudio as any).paused) {
+      setcurrentState(true);
+      (myAudio as any).play();
+    } else {
+      setcurrentState(false);
+      (myAudio as any).pause();
+    }
+
+  };
+  const prevClick = () => {
+    const index = songList.findIndex(item => item === currentSong);
+    if (index >= 1) {
+      const songid = songList[index - 1].songid;
+      playSong(event, songid);
+    }
+  };
+  const nextClick = () => {
+    const index = songList.findIndex(item => item === currentSong);
+    if (index >= -1 && index < songList.length - 1) {
+      const songid = songList[index + 1].songid;
+      playSong(event, songid)
+    }
+  };
   return (
     <div className="music-module">
       <div className="music-module-container">
@@ -114,7 +143,6 @@ const Music = () => {
           <div className="music-btn-list">
             <Button>正在播放</Button>
             <Button>搜索</Button>
-            {<Button onClick={TestClick}>测试按钮</Button>}
           </div>
           <div className="music-player-list">
             <div className="music-player-list-header">
@@ -142,19 +170,25 @@ const Music = () => {
         </div>
       </div>
       <div className="music-module-footer">
+        <div className="music-play-progress">
+          <span>0:00</span>
+          <Progress
+            percent={50}
+          />
+          <span>4:30</span>
+        </div>
         <div className="music-play-row">
           <div className="music-play-row-left">
-            {/* <Icon type="step-backward" />
-            <Icon type="play-circle" />
-            <Icon type="step-forward" /> */}
+            <audio autoPlay={true} id="unique-audio" src={String((currentSong as any).url)} />
+            <Icon type="swap" />
           </div>
           <div className="music-play-row-middle">
-            {/* src={require('/node/downloadFiles/002lW4Yl3ylM02.mp3')} */}
-            <audio controls={true} ref={el => { myAudio = el }} src={String((currentSong as any).url)} />
+            <Icon type="step-backward" onClick={prevClick} />
+            <Icon type={currentState ? "pause-circle" : "play-circle"} onClick={pauseClick} />
+            <Icon type="step-forward" onClick={nextClick} />
           </div>
           <div className="music-play-row-right">
-            {/* <Icon type="swap" />
-            <Icon type="sound" /> */}
+            <Icon type="sound" />
           </div>
         </div>
       </div>

@@ -1,6 +1,16 @@
 [
     {
         "type": "qq",
+        "link": "https://y.qq.com/n/yqq/song/001PLl3C4gPSCI.html",
+        "songid": "unique",
+        "title": "我是如此相信",
+        "author": "周杰伦",
+        "url": "",
+        "pic": "http://y.gtimg.cn/music/photo_new/T002R300x300M000003RMaRI1iFoYd.jpg",
+        "path": ""
+    },
+    {
+        "type": "qq",
         "link": "http://y.qq.com/n/yqq/song/003OUlho2HcRHC.html",
         "songid": "003OUlho2HcRHC",
         "title": "告白气球",

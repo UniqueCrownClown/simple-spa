@@ -24,6 +24,7 @@ interface TopMenuItem {
 }
 interface Props {
   location: any;
+  match: any;
 }
 interface State {
   visible: boolean;
@@ -45,9 +46,9 @@ class Main extends React.Component<Props, State> {
             { id: '1-2', label: '1-2', link: '/main/writemoment' }]
         },
         { id: '3', label: '音乐', link: '/' },
-        { id: '4', label: '生辰', link: '/main/lifeClock' },
-        { id: '2', label: '聊天', link: '/main/chat' },
-        { id: '5', label: '测试', link: '/main/test' },
+        { id: '4', label: '生辰', link: '//lifeClock' },
+        { id: '2', label: '聊天', link: '//chat' },
+        { id: '5', label: '测试', link: '//hello' },
         ],
       topMenu: [],
       collapsed: true
@@ -55,6 +56,7 @@ class Main extends React.Component<Props, State> {
   }
   public render() {
     const { topMenu, leftMenu } = this.state;
+    const {match} = this.props;
     return (
       <Router>
         <div className="treasure-main">
@@ -106,12 +108,12 @@ class Main extends React.Component<Props, State> {
             {/* exact参数，路由是否严格匹配 */}
             <div className="right-side">
               <Switch>
-                <Route path="/main/chat" exact={true} component={ChatMain} />
-                <Route path="/main/lifeClock" exact={true} component={LifeClock} />
+                <Route path={`${match.path}/chat`} component={ChatMain} />
+                <Route path={`${match.path}/lifeClock`} component={LifeClock} />
                 <Route path="/main/moment" exact={true} component={Moment} />
                 <Route path="/main/writemoment" exact={true} component={WriteMoment} />
-                <Route path="/" component={Music} />
-                <Route path="/main/hello" exact={true} component={Test} />
+                <Route path={match.path} component={Music} />
+                <Route path={`${match.path}/hello`} component={Test} />
               </Switch>
             </div>
           </div>
