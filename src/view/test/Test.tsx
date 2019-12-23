@@ -29,25 +29,25 @@ const Test = () => {
 
     // tip2
     // 在一个只想执行一次的 Effect 里依赖了外部变量1个
-    useEffect(() => {
-        const id = setInterval(() => {
-            setCount(c => c + 1);
-        }, 5000);
-        return () => clearInterval(id);
-    }, []);
+    // useEffect(() => {
+    //     const id = setInterval(() => {
+    //         setCount(c => c + 1);
+    //     }, 5000);
+    //     return () => clearInterval(id);
+    // }, []);
     // setCount 还有一种函数回调模式，你不需要关心当前值是什么，只要对 “旧的值” 进行修改即可。
     // 这样虽然代码永远运行在第一次 Render 中，但总是可以访问到最新的 state
     // 在一个只想执行一次的 Effect 里依赖了外部变量2个
     // 利用 useEffect 的兄弟 useReducer 函数，将更新与动作解耦就可以了
 
-    const [state, dispatch] = useReducer(reducer, initialState);
+    // const [state, dispatch] = useReducer(reducer, initialState);
 
-    useEffect(() => {
-        const id = setInterval(() => {
-            dispatch({ type: "tick" }); // Instead of setCount(c => c + step);
-        }, 1000);
-        return () => clearInterval(id);
-    }, [dispatch]);
+    // useEffect(() => {
+    //     const id = setInterval(() => {
+    //         dispatch({ type: "tick" }); // Instead of setCount(c => c + step);
+    //     }, 1000);
+    //     return () => clearInterval(id);
+    // }, [dispatch]);
     // tip3
 
 
@@ -62,16 +62,18 @@ const Test = () => {
     );
 
 }
-const reducer = (statex, action) => {
-    const { count, step } = statex;
-    switch (action.type) {
-        case "tick": return { count: count + step, step };
-        case "step": return { count, step: action.step };
-    }
-    return statex
-};
-const initialState = {
-    count: 0,
-    step: 1,
-};
+
+
+// const reducer = (statex, action) => {
+//     const { count, step } = statex;
+//     switch (action.type) {
+//         case "tick": return { count: count + step, step };
+//         case "step": return { count, step: action.step };
+//     }
+//     return statex
+// };
+// const initialState = {
+//     count: 0,
+//     step: 1,
+// };
 export default Test;

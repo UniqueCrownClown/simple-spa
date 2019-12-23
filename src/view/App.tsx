@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./main/Main";
 import Register from "./register/Register";
 import Login from "./login/Login";
@@ -10,8 +10,8 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Switch>
-            <Route path="/" exact={true} component={Main} />
-            <Route path="/register" component={Register} />
+            <Route path="/" component={Main} />
+            <Route path="/register" exact={true} component={Register} />
             <Route path="/login" exact={true} component={Login} />
           </Switch>
         </div>

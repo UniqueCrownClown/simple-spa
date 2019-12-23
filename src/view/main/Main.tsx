@@ -45,9 +45,9 @@ class Main extends React.Component<Props, State> {
             [{ id: '1-1', label: '1-1', link: '/main/moment' },
             { id: '1-2', label: '1-2', link: '/main/writemoment' }]
         },
-        { id: '3', label: '音乐', link: '/' },
-        { id: '4', label: '生辰', link: '//lifeClock' },
         { id: '2', label: '聊天', link: '//chat' },
+        { id: '3', label: '音乐', link: '//music' },
+        { id: '4', label: '生辰', link: '//lifeClock' },
         { id: '5', label: '测试', link: '//hello' },
         ],
       topMenu: [],
@@ -56,7 +56,7 @@ class Main extends React.Component<Props, State> {
   }
   public render() {
     const { topMenu, leftMenu } = this.state;
-    const {match} = this.props;
+    const { match } = this.props;
     return (
       <Router>
         <div className="treasure-main">
@@ -108,12 +108,13 @@ class Main extends React.Component<Props, State> {
             {/* exact参数，路由是否严格匹配 */}
             <div className="right-side">
               <Switch>
+                <Route path="/" component={Music} exact={true} />
                 <Route path={`${match.path}/chat`} component={ChatMain} />
                 <Route path={`${match.path}/lifeClock`} component={LifeClock} />
-                <Route path="/main/moment" exact={true} component={Moment} />
-                <Route path="/main/writemoment" exact={true} component={WriteMoment} />
-                <Route path={match.path} component={Music} />
+                <Route path={`${match.path}/moment`} component={Moment} />
+                <Route path={`${match.path}/writemoment`} component={WriteMoment} />
                 <Route path={`${match.path}/hello`} component={Test} />
+                <Route path={`${match.path}/music`} component={Music} />
               </Switch>
             </div>
           </div>
