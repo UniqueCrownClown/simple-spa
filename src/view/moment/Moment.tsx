@@ -5,7 +5,7 @@ import "./Moment.less";
 import MessageBox, {
   MessageItem
 } from "../../components/messagebox/MessageBox";
-import CommentBox from "src/components/commentbox/CommentBox";
+import CommentBox from "../../components/commentbox/CommentBox";
 
 interface Props {
   name: string;

@@ -46,4 +46,6 @@ export const register = (params: URLSearchParams) =>
   export const getLrc = (id:string) =>
   axios.get(`node/musicLrc/${id}.json?timestamp=${Date.now()}`).catch(err=>{console.log(err)});
 
+  export default axios
+
   

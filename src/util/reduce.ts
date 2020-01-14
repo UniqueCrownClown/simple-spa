@@ -1,4 +1,4 @@
-const groupBy = <T>(arr: T[], criteria) => {
+export const groupBy = <T>(arr: T[], criteria) => {
     return arr.reduce((obj, item) => {
 
         // 判断criteria是函数还是属性名

@@ -1,8 +1,8 @@
 import { Button, Icon } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getList, getLrc } from 'src/api';
+import { getList, getLrc } from './../../api';
 import "./music.less";
-import Progress from 'src/components/progress/progress';
+import Progress from './../../components/progress/progress';
 
 const Music = () => {
   const [songList, setSongList] = useState([{ songid: "", title: "", author: "" }]);
@@ -55,38 +55,41 @@ const Music = () => {
   useEffect(() => {
     // 渲染完后才允许调用
     const myAudio = document.getElementById("unique-audio");
-    const ddd: any = new Date()
-    myAudio.ontimeupdate = (event: any) => {
-      console.log(event.target.currentTime);
-      // let current: number = (new Date() as any) - ddd;
-      // current = Math.round(current / 1000);
-      const current = Math.round(event.target.currentTime);
-      setPlaying(item => {
-        const index = item.lrcData.findIndex(ele => ele.locate === current.toString());
-        if (index > -1) {
-          const returnData = item.lrcData; // 用深克隆？？
-          returnData.forEach(ele => ele.type = false);
-          returnData[index].type = true;
-          // tramsform
-          const controlDistance: number = 100;
-          const moveDistance = index * 20 - controlDistance > 0 ? index * 20 - controlDistance : 0;
-          document.getElementById("unique-lyricList").style.transform = 'translateY(-' + moveDistance + 'px)';
-          // if (lyricList) {
-          //   lyricList.style.transform = 'translateY(-' + index * 20 + 'px)';
-          // }
-          return { lrcData: returnData }
+    const ddd: any = new Date();
+    if (myAudio) {
+      myAudio.ontimeupdate = (event: any) => {
+        console.log(event.target.currentTime);
+        // let current: number = (new Date() as any) - ddd;
+        // current = Math.round(current / 1000);
+        const current = Math.round(event.target.currentTime);
+        setPlaying(item => {
+          const index = item.lrcData.findIndex(ele => ele.locate === current.toString());
+          if (index > -1) {
+            const returnData = item.lrcData; // 用深克隆？？
+            returnData.forEach(ele => ele.type = false);
+            returnData[index].type = true;
+            // tramsform
+            const controlDistance: number = 100;
+            const moveDistance = index * 20 - controlDistance > 0 ? index * 20 - controlDistance : 0;
+            document.getElementById("unique-lyricList").style.transform = 'translateY(-' + moveDistance + 'px)';
+            // if (lyricList) {
+            //   lyricList.style.transform = 'translateY(-' + index * 20 + 'px)';
+            // }
+            return { lrcData: returnData }
+          }
+          return item
+        })
+      };
+      myAudio.onended = () => {
+        console.log("end");
+        const index = songList.findIndex(item => item === currentSong);
+        if (index >= -1 && index < songList.length - 1) {
+          const songid = songList[index + 1].songid;
+          playSong(event, songid)
         }
-        return item
-      })
-    };
-    myAudio.onended = () => {
-      console.log("end");
-      const index = songList.findIndex(item => item === currentSong);
-      if (index >= -1 && index < songList.length - 1) {
-        const songid = songList[index + 1].songid;
-        playSong(event, songid)
-      }
-    };
+      };
+    }
+
     return () => {
       // 清除myAudio注册事件
     }
