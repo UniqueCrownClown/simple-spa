@@ -7,6 +7,7 @@ import Progress from './../../components/progress/progress';
 const Music = () => {
   const [songList, setSongList] = useState([{ songid: "", title: "", author: "" }]);
   const [currentSong, setcurrentSong] = useState({ songid: "1", title: "1", author: "1" });
+
   const playSong = (event: any, songid: string) => {
     // 歌曲资源托管在码云上
     console.log(songList)

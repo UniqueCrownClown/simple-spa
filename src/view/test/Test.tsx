@@ -49,6 +49,26 @@ const Test = () => {
     //     return () => clearInterval(id);
     // }, [dispatch]);
     // tip3
+    // 钩子函数useCallback的使用
+    // 避免在component render时候声明匿名方法，因为这些匿名方法会被反复重新声明而无法被多次利用，然后容易造成component反复不必要的渲染
+    // 使用useCallback hook就可以避免bind操作
+    // render重新渲染的时候阻止event function的重新声明赋值？？
+
+    // const eventHandler = useCallback(() => {
+    //     const currentText = textRef.current; // Read it from the ref
+    //     console.log(currentText);
+    // },[]);
+    // tip4
+    // const ref = useRef(fn);
+
+    // useCallback配合配合React.Memo使用
+
+    // useCallback并不是提高性能的银弹，错误的使用反而会适得其反。
+
+    // 使用useApi封装自己的hock,相当于用userApi做abstract层的抽象封装？？
+
+
+
 
 
     return (

@@ -80,7 +80,11 @@ typescript如何声明递归类型
 
 	git-action流程
 		http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html 
-
+		测试发现gitpage页执行完actions后还是旧的资源,,和gh-pages上的资源显示不一致。。。
 
 	jest的引入测试util类
+
+
+	数组操作
+		密集数组和稀疏数组
 		

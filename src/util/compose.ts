@@ -17,4 +17,17 @@ export const compose = (...fns: Array<IComposeFn>) => {
     }
     return result
   }
+};
+
+// 观察者模式
+
+const queuedObservers = new Set();
+
+export const observe = fn => queuedObservers.add(fn);
+export const observable = obj => new Proxy(obj, { set });
+
+function set(target, key, value, receiver) {
+  const result = Reflect.set(target, key, value, receiver);
+  queuedObservers.forEach((observer: any) => observer());
+  return result;
 }

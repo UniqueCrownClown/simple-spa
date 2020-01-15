@@ -29,7 +29,6 @@ const NOPE_HANDLER = {
 export const readOnlyView = (target: any) => new Proxy(target, NOPE_HANDLER);
 
 // 枚举
-
 export const createEnum = (target: any) => new Proxy(target, {
     get: (obj, prop) => {
         if (prop in obj) {
@@ -37,5 +36,10 @@ export const createEnum = (target: any) => new Proxy(target, {
         }
         throw new ReferenceError(`Unknown prop "${String(prop)}"`);
     }
+})
+
+// 重载操作符的实现
+export const range = (min: number, max: number) => new Proxy(Object.create(null), {
+    has: (_, prop) => (new Number(prop) >= min && +new Number(prop) <= max)
 })
 
