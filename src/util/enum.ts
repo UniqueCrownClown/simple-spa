@@ -5,6 +5,12 @@ let c: Color = Color.Green;  // 1
 let colorName1: string = Color[1];  // 'Green'
 let colorName2: string = Color[Color.Green];  // 'Green'
 
+// 数据枚举和字符串枚举
+enum Message {
+    Success = "成功",
+    Fail = "失败"
+}
+
 
 // Reflect.get的基本使用test
 const xxx = () => {
