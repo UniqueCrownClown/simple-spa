@@ -40,6 +40,6 @@ export const createEnum = (target: any) => new Proxy(target, {
 
 // 重载操作符的实现
 export const range = (min: number, max: number) => new Proxy(Object.create(null), {
-    has: (_, prop) => (new Number(prop) >= min && +new Number(prop) <= max)
+    has: (_, prop:number) => (prop >= min && prop <= max)
 })
 

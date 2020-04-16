@@ -65,13 +65,13 @@ interface Light {
 }
 
 class Car implements Alarm, Light {
-    alert() {
+    public alert() {
         console.log('Car alert');
     }
-    lightOn() {
+    public lightOn() {
         console.log('Car light on');
     }
-    lightOff() {
+    public lightOff() {
         console.log('Car light off');
     }
 }
@@ -85,8 +85,8 @@ interface LightableAlarm extends Alarm {
 
 // 接口继承类
 class Point {
-    x: number;
-    y: number;
+    public x: number;
+    public y: number;
 }
 
 interface Point3d extends Point {
@@ -97,7 +97,9 @@ let point3d: Point3d = { x: 1, y: 2, z: 3 };
 
 // 可变参数
 // ...restOfname:string[]  这个写法就是可变参数的写法
-function peopleName(firstName: string, ...restOfname: string[]) { }
+const peopleName = (firstName: string, ...restOfname: string[])=> {
+    console.log(firstName, restOfname);
+}
 
 // 单个泛型---T
 // 两个泛型---T, U
@@ -117,8 +119,8 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 // 泛型类
 
 class GenericNumber<T> {
-    zeroValue: T;
-    add: (x: T, y: T) => T;
+    public zeroValue: T;
+    public add: (x: T, y: T) => T;
 }
 
 let myGenericNumber = new GenericNumber<number>();
@@ -127,12 +129,13 @@ myGenericNumber.add = function (x, y) { return x + y; };
 
 
 // 泛型接口
-interface CreateArrayFunc {
-    <T>(length: number, value: T): Array<T>;
-}
-
+// interface CreateArrayFunc {
+//     <T>(length: number, value: T): T[];
+// }
+declare type CreateArrayFunc = <T>(length: number, value: T) => T[];
 let createArray: CreateArrayFunc;
-createArray = function <T>(length: number, value: T): Array<T> {
+
+createArray = function <T>(length: number, value: T): T[] {
     let result: T[] = [];
     for (let i = 0; i < length; i++) {
         result[i] = value;
@@ -145,7 +148,7 @@ createArray(3, 'x'); // ['x', 'x', 'x']
 
 // 泛型参数的默认类型
 
-function createArrayX<T = string>(length: number, value: T): Array<T> {
+function createArrayX<T = string>(length: number, value: T): T[] {
     let result: T[] = [];
     for (let i = 0; i < length; i++) {
         result[i] = value;

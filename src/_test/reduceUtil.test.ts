@@ -6,23 +6,23 @@ test("测试reduce的使用", () => {
     console.log(groupBy(apple, "type"))
 })
 
-//观察者测试
+// 观察者测试
 
 test("simple observer", () => {
 
-    let data = {
+    const data = {
         name: 'jackie',
         age: 30
     };
 
-    //对data属性进行监听
+    // 对data属性进行监听
     const person = observable(data);
 
-    function print() {
+    const print = () => {
         console.log(`${person.name}, ${person.age}`);
     }
 
-    //print作为监听触发的回调函数
+    // print作为监听触发的回调函数
     observe(print);
 
     person.name = 'world';
@@ -37,7 +37,7 @@ test("hello emit!!", () => {
     EventEmitter.emit("apple", "helloWrold11!!");
     EventEmitter.off("apple", a);
     EventEmitter.emit("apple", "helloWrold122!!");
-    EventEmitter.once("peach", function (content:string) {
+    EventEmitter.once("peach", (content: string) => {
         console.log("once callback" + content);
     });
     EventEmitter.emit("peach", "helloWrold33!!");

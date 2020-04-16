@@ -8,6 +8,7 @@ import Moment from "../moment/Moment";
 import WriteMoment from "../moment/WriteMoment";
 import ChatMain from "./../chat/Chat";
 import Test from "./../test/Test";
+import PhotoMain from "../photo/photoMain";
 import "./main.less";
 
 interface IItem {
@@ -40,15 +41,17 @@ class Main extends React.Component<Props, State> {
     super(props);
     this.state = {
       visible: false, current: 'mail', leftMenu:
-        [{
-          id: '1', label: '留言', iconType: 'mail', children:
-            [{ id: '1-1', label: '1-1', link: '/main/moment' },
-            { id: '1-2', label: '1-2', link: '/main/writemoment' }]
-        },
+        [
+        //   {
+        //   id: '1', label: '留言', iconType: 'mail', children:
+        //     [{ id: '1-1', label: '1-1', link: '/main/moment' },
+        //     { id: '1-2', label: '1-2', link: '/main/writemoment' }]
+        // },
         { id: '2', label: '聊天', link: '//chat' },
         { id: '3', label: '音乐', link: '//music' },
         { id: '4', label: '生辰', link: '//lifeClock' },
-        { id: '5', label: '测试', link: '//hello' },
+        { id: '5', label: '照片', link: '//photo' },
+        { id: '6', label: '测试', link: '//hello'}
         ],
       topMenu: [],
       collapsed: true
@@ -114,6 +117,7 @@ class Main extends React.Component<Props, State> {
                 <Route path={`${match.path}/moment`} component={Moment} />
                 <Route path={`${match.path}/writemoment`} component={WriteMoment} />
                 <Route path={`${match.path}/hello`} component={Test} />
+                <Route path={`${match.path}/photo`} component={PhotoMain} />
                 <Route path={`${match.path}/music`} component={Music} />
               </Switch>
             </div>

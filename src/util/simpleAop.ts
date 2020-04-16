@@ -1,9 +1,10 @@
-let emptyFunc = (pointCut?: any, result?: any, error?: any) => {
+const emptyFunc = (pointCut?: any, result?: any, error?: any) => {
+    console.log(pointCut,result,error);
 };
 
-let findPointCut = (target, pointCut) => {
+const findPointCut = (target, pointCut) => {
     if (typeof pointCut === 'string') {
-        let func = target.prototype[pointCut];
+        const func = target.prototype[pointCut];
         // 暂不支持属性的aop
         if (typeof func === 'function') {
             return func;
@@ -12,21 +13,23 @@ let findPointCut = (target, pointCut) => {
     // 暂不支持模糊匹配切点
     return null;
 };
-let advice = (target, pointCut, advice: any = {}) => {
-    let old = findPointCut(target, pointCut);
+const advice = (target, pointCut, adviceX: any = {}) => {
+    const old = findPointCut(target, pointCut);
     if (old) {
-        target.prototype[pointCut] = function () {
-            let self = this;
-            let args = arguments;
-            let joinPoint = {
+        target.prototype[pointCut] = (...apple: any) => {
+            const self = this;
+            const args = apple;
+            const joinPoint = {
                 target,
                 method: old,
                 args,
                 self
             };
-            let { before, round, after, afterReturn, afterThrow } = advice;
+            const { before,after, afterReturn, afterThrow } = adviceX;
+            let {round} = adviceX;
             // 前置增强
-            before && before.call(self, joinPoint, null, null);
+            const a = before && before.call(self, joinPoint, null, null);
+            console.log(a);
             // 环绕增强
             let roundJoinPoint = joinPoint;
             if (round) {
@@ -53,13 +56,13 @@ let advice = (target, pointCut, advice: any = {}) => {
                 } catch (e) {
                     error = e;
                     // 异常增强
-                    let shouldIntercept = afterThrow && afterThrow.call(self, joinPoint, e);
+                    const shouldIntercept = afterThrow && afterThrow.call(self, joinPoint, e);
                     if (!shouldIntercept) {
                         throw e;
                     }
                 } finally {
                     // 后置增强
-                    after && after.call(self, joinPoint, result, error);
+                    result = after && after.call(self, joinPoint, result, error);
                 }
             } else {
                 // 未定义任何后置增强,直接执行原方法
@@ -68,8 +71,7 @@ let advice = (target, pointCut, advice: any = {}) => {
         };
     }
 };
-
-let aop = {
+const aop = {
     before(target, pointCut, before = emptyFunc) {
         advice(target, pointCut, { before });
     },

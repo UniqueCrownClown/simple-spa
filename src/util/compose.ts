@@ -1,5 +1,5 @@
 declare type IComposeFn = (...args: any) => any;
-export const compose = (...fns: Array<IComposeFn>) => {
+export const compose = (...fns: IComposeFn[]) => {
   // const fns: Array<any> = [].slice.call(args);
   // return function (initialArg: any) {
   //   let res = initialArg
@@ -9,9 +9,9 @@ export const compose = (...fns: Array<IComposeFn>) => {
   //   return res
   // }
   const length = fns.length;
-  return function (this: any, ...args: Array<any>) {
-    let index = length - 1,
-      result = length > 0 ? fns[index].apply(this, args) : args; //注意arg为数组，要用apply
+  return function (this: any, ...args: any[]) {
+    let index = length - 1;
+    let result = length > 0 ? fns[index].apply(this, args) : args; // 注意arg为数组，要用apply
     while (--index >= 0) {
       result = fns[index].call(this, result);
     }
@@ -38,19 +38,21 @@ export const EventEmitter: any = {
   list: {},
   // 订阅
   on(event, fn) {
-    let _this = this;
+    const _this = this;
     (_this.list[event] || (_this.list[event] = [])).push(fn);
     return _this;
   },
   off(event, fn) {
-    let _this = this;
-    let fns = _this.list[event];
+    const _this = this;
+    const fns = _this.list[event];
     if (!fns) {
       return false;
     }
     if (!fn) {
       // 如果没有传 fn 的话，就会将 event 值对应缓存列表中的 fn 都清空
-      fns && (fns.length = 0);
+      if(fns){
+        fns.length = 0;
+      }
     } else {
       // if (fns && fns.includes(fn)) {
       //   fns.splice(fns.findIndex(item => item === fn || item.fn === fn), 1);
@@ -70,7 +72,7 @@ export const EventEmitter: any = {
   },
   once(event, fn) {
     // 调用后删除怎么实现
-    let _this = this;
+    const _this = this;
     function on() {
       _this.off(event, on);
       fn.apply(_this, arguments)
@@ -80,15 +82,15 @@ export const EventEmitter: any = {
     return _this;
   },
   // 发布
-  emit() {
-    let _this = this;
-    let event = [].shift.call(arguments),
-      fns = [..._this.list[event]];
+  emit(...args: any[]) {
+    const _this = this;
+    const event = [].shift.call(args);
+    const fns = [..._this.list[event]];
     if (!fns || fns.length === 0) {
       return false;
     }
     // 遍历 event值对应的缓存列表，依次执行fn
-    let haha = arguments;
+    const haha = args;
     fns.forEach(fn => {
       fn.apply(_this, haha);
     });

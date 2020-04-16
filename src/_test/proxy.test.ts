@@ -11,7 +11,7 @@ test("proxy的简单应用", () => {
     const hello = withZeroValue({ id: "1" }, "initalState");
     console.log(hello.apple);
     
-    let apple = [1, 2, 3, 4, 5];
+    const apple = [1, 2, 3, 4, 5];
     console.log(negativeArray(apple)[-1]);
 
     const X = 10.5;

@@ -1,5 +1,5 @@
 import { Button, Icon } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, AudioHTMLAttributes } from 'react';
 import { getList, getLrc } from './../../api';
 import "./music.less";
 import Progress from './../../components/progress/progress';
@@ -7,7 +7,8 @@ import Progress from './../../components/progress/progress';
 const Music = () => {
   const [songList, setSongList] = useState([{ songid: "", title: "", author: "" }]);
   const [currentSong, setcurrentSong] = useState({ songid: "1", title: "1", author: "1" });
-
+  const [currentTime, setcurrentTime] = useState("00:00");
+  const [totalTime, settotalTime] = useState("00:00");
   const playSong = (event: any, songid: string) => {
     // 歌曲资源托管在码云上
     console.log(songList)
@@ -34,6 +35,7 @@ const Music = () => {
     });
   }, []);
   const [playing, setPlaying] = useState({ lrcData: [] });
+  const [playPercent, setPlayPercent] = useState(0);
   const lrc = (songid: string) => {
     getLrc(songid).then((res: any) => {
       const src = formatLrc(res.data.lrc);
@@ -45,7 +47,7 @@ const Music = () => {
           hahahx.push({
             locate: prop,
             content: src[prop],
-            type: false
+            type: false // 是否当前的歌词
           });
         }
       }
@@ -53,13 +55,27 @@ const Music = () => {
       setPlaying({ lrcData: hahahx })
     })
   };
+  const formatTime = (a: number): string => {
+    const b = Math.floor(a);
+    const min: string = Math.floor(a / 60) > 10 ? Math.floor(a / 60).toString() : "0" + Math.floor(a / 60).toString();
+    const second: string = Math.floor(a % 60) > 10 ? Math.floor(a % 60).toString() : "0" + Math.floor(a % 60).toString();
+    return min + ":" + second
+  }
+  const getSecond = (a: string): number => {
+    const numArr = a.split(":");
+    return parseInt(numArr[0], 10) * 60 + parseInt(numArr[1], 10);
+  };
   useEffect(() => {
     // 渲染完后才允许调用
-    const myAudio = document.getElementById("unique-audio");
+    const myAudio: any = document.getElementById("unique-audio");
     const ddd: any = new Date();
     if (myAudio) {
+      myAudio.oncanplay = () => {
+        console.log(myAudio.duration.toString())
+        settotalTime(formatTime(myAudio.duration))
+      }
       myAudio.ontimeupdate = (event: any) => {
-        console.log(event.target.currentTime);
+        // console.log(event.target.currentTime);
         // let current: number = (new Date() as any) - ddd;
         // current = Math.round(current / 1000);
         const current = Math.round(event.target.currentTime);
@@ -80,6 +96,9 @@ const Music = () => {
           }
           return item
         })
+        // 设置进度条
+        setPlayPercent(current / getSecond(totalTime));
+        setcurrentTime(formatTime(current));
       };
       myAudio.onended = () => {
         console.log("end");
@@ -94,7 +113,7 @@ const Music = () => {
     return () => {
       // 清除myAudio注册事件
     }
-  }, [currentSong]);
+  }, [currentSong, totalTime]);
   const formatLrc = (str: string) => {
     const lrcObj = {};
     const regExp = /\[(\d{2}):(\d{2})\.(\d{2})\](.*)/g;
@@ -175,11 +194,12 @@ const Music = () => {
       </div>
       <div className="music-module-footer">
         <div className="music-play-progress">
-          <span>0:00</span>
+          <span>{currentTime}</span>
           <Progress
-            percent={50}
+            percent={playPercent}
+            percentProgress={50}
           />
-          <span>4:30</span>
+          <span>{totalTime}</span>
         </div>
         <div className="music-play-row">
           <div className="music-play-row-left">

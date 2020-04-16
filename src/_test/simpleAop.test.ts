@@ -1,28 +1,33 @@
 import aop from "../util/simpleAop";
+import { getLinkNode } from "../util/linkNode";
 class Test {
-    constructor() {
-    }
     public test() {
         console.log("我是一个没有感情的工具人")
     }
 }
+test("测试linkNode", () => {
+    const result = {};
+    getLinkNode("123", result);
+    console.log(result);
+})
 
-test('测试aop before', () => {
-    aop.before(Test, 'test', (joinPoint, result, error) => {
-        console.log(joinPoint);
-        console.log('在test方法执行前执行');
-    });
-    let apple = new Test();
-    apple.test();
-})
-test('测试aop after', () => {
-    aop.after(Test, 'test', (joinPoint, result, error) => {
-        console.log(joinPoint)
-        console.log('在test方法执行后执行');
-    });
-    let apple = new Test();
-    apple.test();
-})
+
+// test('测试aop before', () => {
+//     aop.before(Test, 'test', (joinPoint, result, error) => {
+//         console.log(joinPoint);
+//         console.log('在test方法执行前执行');
+//     });
+//     const apple = new Test();
+//     apple.test();
+// })
+// test('测试aop after', () => {
+//     aop.after(Test, 'test', (joinPoint, result, error) => {
+//         console.log(joinPoint)
+//         console.log('在test方法执行后执行');
+//     });
+//     let apple = new Test();
+//     apple.test();
+// })
 
 // aop.afterThrow(Test, 'test', (joinPoint, error) => {
 //     let { target, method, args, self } = joinPoint;
