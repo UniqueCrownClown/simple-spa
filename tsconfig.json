@@ -29,6 +29,7 @@
     "jest",
     "src/setupTests.ts",
     "src/util/syntax.ts",
-    "src/view/test/"
+    "src/view/test/",
+    "server"
   ]
 }

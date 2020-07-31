@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import registerServiceWorker from "./registerServiceWorker";
 import App from "./view/App";
 import "./less/index.less";
+import "./assets/css/font/iconfont.css";
 import { Provider } from "react-redux";
 import configureStore from "./stores/";
 

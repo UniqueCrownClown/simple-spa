@@ -1,11 +1,23 @@
 import { groupBy } from "../util/reduce";
 import { observe, observable, EventEmitter } from "../util/compose";
 
+import { compose } from "../util/compose";
+
 const apple = [{ id: "xiao", name: "xiao", type: "aa" }, { id: "da", name: "da", type: "bb" }, { id: "middle", name: "middle", type: "aa" }];
 test("测试reduce的使用", () => {
     console.log(groupBy(apple, "type"))
 })
-
+// 函数式调用
+test("测试简单的compose", () => {
+    const sss = (str: string) => {
+        return str + "apple is good";
+    }
+    const bFn = (str: string) => {
+        return str.concat(",peach is good too")
+    }
+    const xxxx = compose(bFn,sss)("fruit:");
+    console.log(xxxx);
+});
 // 观察者测试
 
 test("simple observer", () => {
@@ -29,13 +41,13 @@ test("simple observer", () => {
 })
 
 // 发布订阅测试
-const a = (content: string) => {
+const aFn = (content: string) => {
     console.log("callback" + content);
 }
 test("hello emit!!", () => {
-    EventEmitter.on("apple", a);
+    EventEmitter.on("apple", aFn);
     EventEmitter.emit("apple", "helloWrold11!!");
-    EventEmitter.off("apple", a);
+    EventEmitter.off("apple", aFn);
     EventEmitter.emit("apple", "helloWrold122!!");
     EventEmitter.once("peach", (content: string) => {
         console.log("once callback" + content);

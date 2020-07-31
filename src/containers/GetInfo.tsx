@@ -5,9 +5,9 @@ import { Dispatch } from "redux";
 import { StoreState } from "../stores/typing";
 // import { bindActionCreators } from "redux";
 
-export function mapStateToProps({ userBithday }: StoreState) {
+export function mapStateToProps({ userBirthday }: StoreState) {
   return {
-    birth: userBithday
+    birth: userBirthday
   };
 }
 // 异步的dispatch怎么写怎么处理

@@ -1,4 +1,5 @@
 {
+  "defaultSeverity": "none",
   "extends": [
     "tslint:recommended",
     "tslint-react",

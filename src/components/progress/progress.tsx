@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-
+import React from 'react'
+import ReactDOM from 'react-dom'
 import './progress.less'
+
 
 // 进度条拖动组件
 

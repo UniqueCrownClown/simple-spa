@@ -1,0 +1,52 @@
+.music-module-footer {
+
+    // height: 60px;
+    .music-play-progress {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        &>span {
+            width: 100px;
+            text-align: center;
+            color: #ffffff;
+        }
+    }
+
+    .music-play-row {
+        display: flex;
+        align-items: center;
+
+        .music-play-row-left {
+            &>i {
+                font-size: 24px;
+                color: #ffffff;
+                margin: 8px;
+                cursor: pointer;
+            }
+            audio {
+                width: 100%;
+                outline: none;
+            }
+        }
+
+        .music-play-row-middle {
+            flex: 1;
+
+            &>i {
+                font-size: 32px;
+                color: #ffffff;
+                margin: 8px;
+                cursor: pointer;
+            }
+        }
+
+        .music-play-row-right {
+            &>i {
+                font-size: 24px;
+                color: #ffffff;
+                margin: 8px;
+                cursor: pointer;
+            }
+        }
+    }
+}

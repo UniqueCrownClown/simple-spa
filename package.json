@@ -1,35 +1,36 @@
 {
-  "homepage": "https://uniquecrownclown.github.io/simple-spa",
-  "name": "simple-spa",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "antd": "^3.11.6",
-    "axios": "^0.18.0",
-    "md5": "^2.2.1",
-    "moment": "^2.23.0",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-redux": "^6.0.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts-ts-antd": "2.17.0"
-  },
-  "scripts": {
-    "start": "react-scripts-ts-antd start",
-    "build": "react-scripts-ts-antd build",
-    "test": "react-scripts-ts-antd test --env=jsdom",
-    "eject": "react-scripts-ts-antd eject"
-  },
-  "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "@types/jest": "^23.3.11",
-    "@types/md5": "^2.1.33",
-    "@types/node": "^10.12.18",
-    "@types/react": "^16.7.18",
-    "@types/react-dom": "^16.0.11",
-    "@types/react-redux": "^6.0.12",
-    "@types/react-router-dom": "^4.3.1",
-    "gh-pages": "^2.1.1",
-    "typescript": "^3.2.2"
-  }
+    "homepage": "https://uniquecrownclown.github.io/simple-spa",
+    "name": "simple-spa",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "antd": "^3.11.6",
+        "antd-mobile": "^2.3.1",
+        "axios": "^0.18.0",
+        "md5": "^2.2.1",
+        "moment": "^2.23.0",
+        "react": "16.8.0",
+        "react-dom": "16.8.0",
+        "react-redux": "^7.2.1",
+        "react-router-dom": "^4.3.1",
+        "react-scripts-ts-antd": "^2.17.0"
+    },
+    "scripts": {
+        "start": "react-scripts-ts-antd start",
+        "build": "react-scripts-ts-antd build",
+        "test": "react-scripts-ts-antd test --env=jsdom",
+        "eject": "react-scripts-ts-antd eject"
+    },
+    "devDependencies": {
+        "@types/axios": "^0.14.0",
+        "@types/jest": "^23.3.11",
+        "@types/md5": "^2.1.33",
+        "@types/node": "^10.12.18",
+        "@types/react": "^16.7.18",
+        "@types/react-dom": "^16.0.11",
+        "@types/react-router-dom": "^4.3.1",
+        "@types/react-redux": "^7.1.9",
+        "gh-pages": "^2.1.1",
+        "typescript": "^3.2.2"
+    }
 }

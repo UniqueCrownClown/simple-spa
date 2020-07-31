@@ -1,6 +1,5 @@
 
 https://www.jianshu.com/p/c0d759ef881b
-typeorm
 装饰器使用
 1. 怎么添加server 
 2. 添加websocket实现简单聊天室
@@ -90,4 +89,26 @@ typescript如何声明递归类型
 
 	自定义hooks
 		https://juejin.im/post/5e57d0dfe51d4526ce6147f2#heading-6
+		
+	
+package.json
+	// "eslintConfig": {
+    //     "extends": "react-app",
+    //     "rules": {
+    //         "no-undef": "off",
+    //         "no-restricted-globals": "off",
+    //         "no-unused-vars": "off"
+    //     }
+    // }
+
+
+
+	config-overrides怎么注入loader的设置
+
+	less文件中import的css的语法
+
+
+	怎么把音乐这个component一直挂载在后台？？
+	放到main.tsx上？？？
+	
 		
