@@ -37,10 +37,10 @@ export function setUserBirth(value: string): SETUSERBIRTHDAY {
   };
 }
 
-export function setLyricData(payload: any): any {
+export function setMusicTime(payload: any): any {
   return {
-    type: "setLyricData",
-    lyricData: payload,
+    type: "setMusicTime",
+    musicTime: payload,
   };
 }
 export function setSongList(payload: any): any {
@@ -51,7 +51,6 @@ export function setSongList(payload: any): any {
 }
 
 export function setCurrentSong(payload: any): any {
-
   return {
     type: 'setCurrentSong',
     currentSong: payload

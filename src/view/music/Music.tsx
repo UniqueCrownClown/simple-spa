@@ -1,13 +1,11 @@
 import { Button } from "antd";
-import React, { useEffect, useState } from "react";
-import { getList, getLrc } from "./../../api";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../stores/actions";
+import { getList } from "./../../api";
 import LyricList from "./LyricList";
 import "./music.less";
-import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../stores/actions";
-import { lrc } from "./lrcUtil";
 export default () => {
-  const lyricData = useSelector((state: any) => state.lyricData);
   const currentSong = useSelector((state: any) => state.currentSong);
   const songList = useSelector((state: any) => state.songList);
   const dispatch = useDispatch();
@@ -17,10 +15,6 @@ export default () => {
     dispatch(
       actions.setCurrentSong(songList.find((item) => item.songid === songid))
     );
-    // 显示歌词
-    lrc(songid).then((data) => {
-      dispatch(actions.setLyricData(data));
-    });
   };
   useEffect(() => {
     // 在组件下一次重新渲染之后执行
@@ -39,9 +33,6 @@ export default () => {
         dispatch(actions.setSongList(hahaha23));
         const randomSong = Math.ceil(100 * Math.random());
         dispatch(actions.setCurrentSong(hahaha23[randomSong]));
-        // 显示歌词
-        const data = await lrc(hahaha23[randomSong].songid);
-        dispatch(actions.setLyricData(data));
       });
     }
   }, []);
@@ -84,7 +75,7 @@ export default () => {
             ))}
           </div>
         </div>
-        <LyricList currentSong={currentSong} lrcData={lyricData} />
+        <LyricList />
       </div>
     </div>
   );

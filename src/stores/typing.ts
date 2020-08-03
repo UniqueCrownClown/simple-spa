@@ -2,7 +2,7 @@ export interface StoreState {
   languageName: string;
   enthusiasmLevel: number;
   userBirthday: string;
-  lyricData:any;
+  musicTime:any;
   currentSong: any;
   songList:any
 }

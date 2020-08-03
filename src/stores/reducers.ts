@@ -19,10 +19,10 @@ export function enthusiasm(
         ...state,
         userBirthday: (action as any).userBirthday
       };
-      case "setLyricData" : 
+      case "setMusicTime" : 
       return {
         ...state,
-        lyricData: (action as any).lyricData
+        musicTime : (action as any).musicTime
       }
       case "setCurrentSong":
         return {

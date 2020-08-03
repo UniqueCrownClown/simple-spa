@@ -39,13 +39,13 @@ export const login = (params: URLSearchParams) =>
 export const register = (params: URLSearchParams) =>
   instance.post(`${URL}/api/user`, params);
 
-  const url = `node/musicList.json?timestamp=${Date.now()}`
-  export const getList = () =>
-  axios.get(url).catch(err=>{console.log(err)});
+const url = `https://cdn.jsdelivr.net/gh/UniqueCrownClown/pic-bed/music/musicList.json?timestamp=${Date.now()}`
+export const getList = () =>
+  axios.get(url).catch(err => { console.log(err) });
 
-  export const getLrc = (id:string) =>
-  axios.get(`node/musicLrc/${id}.json?timestamp=${Date.now()}`).catch(err=>{console.log(err)});
+export const getLrc = (id: string) =>
+  axios.get(`https://cdn.jsdelivr.net/gh/UniqueCrownClown/pic-bed/music/${id}.json?timestamp=${Date.now()}`).catch(err => { console.log(err) });
 
-  export default axios
+export default axios
 
-  
+

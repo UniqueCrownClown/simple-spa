@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../stores/actions";
 import Progress from "./../../components/progress/progress";
 import "./musicBar.less";
-import { lrc } from "./lrcUtil";
 enum PlayType {
   Single,
   Random,
   List,
 }
 export default () => {
-  const lyricData = useSelector((state: any) => state.lyricData);
   const currentSong = useSelector((state: any) => state.currentSong);
   const songList = useSelector((state: any) => state.songList);
   const dispatch = useDispatch();
@@ -18,20 +16,11 @@ export default () => {
   const [currentTime, setcurrentTime] = useState("00:00");
   const [totalTime, settotalTime] = useState("00:00");
   const [playType, setPlayType] = useState(PlayType.List);
-  const setLyricProcess = (current) => {
-    return lyricData.map((item: any) => {
-      if (item.locate === current.toString()) {
-        return { ...item, type: false };
-      } else {
-        return { ...item, type: true };
-      }
-    });
-  };
   const dragEnd = (percent: number) => {
     const myAudio: any = document.getElementById("unique-audio");
     myAudio.currentTime = getSecond(totalTime) * percent;
     // 同步一下歌词
-    dispatch(actions.setLyricData(setLyricProcess(myAudio.currentTime)));
+    dispatch(actions.setMusicTime(myAudio.currentTime));
   };
   useEffect(() => {
     // 渲染完后才允许调用
@@ -42,13 +31,12 @@ export default () => {
         settotalTime(formatTime(myAudio.duration));
       };
       myAudio.ontimeupdate = (event: any) => {
-        const current = Math.round(event.target.currentTime);
+        const currentTime = Math.round(event.target.currentTime);
 
-        dispatch(actions.setLyricData(setLyricProcess(current)));
-
+        dispatch(actions.setMusicTime(currentTime));
         // 设置进度条
-        setPlayPercent(current / getSecond(totalTime));
-        setcurrentTime(formatTime(current));
+        setPlayPercent(currentTime / getSecond(totalTime));
+        setcurrentTime(formatTime(currentTime));
       };
       myAudio.onended = () => {
         nextClick();
@@ -65,10 +53,6 @@ export default () => {
     dispatch(
       actions.setCurrentSong(songList.find((item) => item.songid === songid))
     );
-    // 显示歌词
-    lrc(songid).then((data) => {
-      dispatch(actions.setLyricData(data));
-    });
   };
 
   //顺序播放

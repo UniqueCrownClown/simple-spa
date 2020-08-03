@@ -4,11 +4,11 @@ export default {
   userBirthday: "1970-01-01",
   songList: [],
   currentSong: {
-    songid: "1",
+    songid: "",
     title: "",
     author: "jay",
     url: "",
     pic:""
   },
-  lyricData: [],
+  musicTime:'0',
 };
