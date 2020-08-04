@@ -66,6 +66,11 @@ class Main extends React.Component<Props, State> {
       <Router>
         <div className="treasure-main">
           <div className="treasure-header">
+            <Icon
+              type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
+              onClick={this.toggleCollapsed}
+              style={{ fontSize: "24px", color: "#fff" }}
+            />
             <div className="treasure-header-title">Moment</div>
             <Icon
               type="menu-fold"
@@ -103,15 +108,6 @@ class Main extends React.Component<Props, State> {
           </Drawer>
           <div className="main-container">
             <div className="left-side">
-              <Button
-                type="primary"
-                onClick={this.toggleCollapsed}
-                style={{ marginBottom: 16 }}
-              >
-                <Icon
-                  type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-                />
-              </Button>
               <Menu
                 onClick={this.handleClick2}
                 defaultSelectedKeys={["1"]}
@@ -125,7 +121,7 @@ class Main extends React.Component<Props, State> {
             </div>
             <div className="right-side">
               {/* exact参数，路由是否严格匹配 */}
-              <Switch>                
+              <Switch>
                 <Route path="/music" component={Music} />
                 <Route path="/chat" component={ChatMain} />
                 <Route path="/lifeClock" component={LifeClock} />
@@ -139,7 +135,7 @@ class Main extends React.Component<Props, State> {
             </div>
           </div>
           <div className="treasure-footer">
-          <MusicBar/>    
+            <MusicBar />
           </div>
         </div>
       </Router>

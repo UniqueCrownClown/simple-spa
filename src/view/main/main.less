@@ -15,14 +15,16 @@ body {
     /*滚动条里面小方块*/
     border-radius: 10px;
     background-color: skyblue;
-    background-image: -webkit-linear-gradient(45deg,
-        rgba(255, 255, 255, 0.2) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0.2) 75%,
-        transparent 75%,
-        transparent);
+    background-image: -webkit-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent
+    );
   }
 
   ::-webkit-scrollbar-track {
@@ -32,7 +34,6 @@ body {
     border-radius: 10px;
   }
 }
-
 
 .treasure-main {
   text-align: center;
@@ -46,7 +47,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.5);
     height: 60px;
 
     .treasure-header-title {
@@ -78,6 +79,7 @@ body {
     .right-side {
       flex: 1;
       height: 100%;
+      overflow-x: hidden;
     }
   }
 
@@ -90,12 +92,12 @@ body {
 .drawer-content {
   text-align: center;
 
-  &>div {
+  & > div {
     margin: 10px 0;
     cursor: pointer;
 
     &:hover {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 }

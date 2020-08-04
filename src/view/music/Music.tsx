@@ -26,7 +26,6 @@ export default () => {
           item.url = `http://jaymusic.gitee.io/jaymusic${item.path}`;
           return item;
         });
-        console.log(hahaha23);
         // 本地路径
         hahaha23[0].url = `node/localMusic/a.mp3`;
         // 初始化自动播放

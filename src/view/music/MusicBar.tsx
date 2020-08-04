@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../stores/actions";
 import Progress from "./../../components/progress/progress";
 import "./musicBar.less";
+import { getList } from "src/api";
 enum PlayType {
   Single,
   Random,
@@ -69,6 +70,21 @@ export default () => {
   // 随机播放
   const pauseClick = () => {
     const myAudio = document.getElementById("unique-audio");
+    if (songList.length <= 0) {
+      getList().then(async (res: any) => {
+        const hahaha23 = res.data.map((item) => {
+          item.show = true;
+          item.url = `http://jaymusic.gitee.io/jaymusic${item.path}`;
+          return item;
+        });
+        // 本地路径
+        hahaha23[0].url = `node/localMusic/a.mp3`;
+        // 初始化自动播放
+        dispatch(actions.setSongList(hahaha23));
+        const randomSong = Math.ceil(100 * Math.random());
+        dispatch(actions.setCurrentSong(hahaha23[randomSong]));
+      });
+    }
     if ((myAudio as any).paused) {
       setcurrentState(true);
       (myAudio as any).play();
@@ -83,6 +99,7 @@ export default () => {
     if (index >= 1) {
       const songid = songList[index - 1].songid;
       playSong(event, songid);
+      setcurrentState(true);
     }
   };
   const nextClick = () => {
@@ -91,6 +108,7 @@ export default () => {
       if (index >= -1 && index < songList.length - 1) {
         const songid = songList[index + 1].songid;
         playSong(event, songid);
+        setcurrentState(true);
       }
     } else if (playType === PlayType.Random) {
       const index = songList.findIndex((item) => item === currentSong);

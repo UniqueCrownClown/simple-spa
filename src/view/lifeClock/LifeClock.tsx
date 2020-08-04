@@ -72,7 +72,7 @@ class LifeClock extends React.Component<Props, State> {
       <div className="shengchen">
         <div className="shengchen_content">
           <div>
-            <h3 style={{ color: "#ffffff", fontSize: "24px" }}>
+            <h3 style={{ color: "#ffffff", fontSize: "18px" }}>
               {this.state.apple}
             </h3>
             <Clock name="时钟" type="white" />
