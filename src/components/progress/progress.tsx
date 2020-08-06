@@ -101,6 +101,9 @@ class Progress extends React.Component<Props, State> {
 
   // 点击事件
   private barClick = e => {
+    if(!this.mmProgress){
+      return;
+    }
     const rect = this.mmProgress.getBoundingClientRect()
     const offsetWidth = Math.min(rect.width, Math.max(0, e.clientX - rect.left))
     this.setState({ offsetWidth })
@@ -111,6 +114,9 @@ class Progress extends React.Component<Props, State> {
 
   // 鼠标/触摸开始事件
   private barDown = e => {
+    if(!this.mmProgressInner){
+      return;
+    }
     this.setState({
       status: true,
       startX: e.clientX || e.touches[0].pageX,

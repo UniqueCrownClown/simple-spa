@@ -28,10 +28,10 @@ export default () => {
         });
         // 本地路径
         hahaha23[0].url = `node/localMusic/a.mp3`;
-        // 初始化自动播放
         dispatch(actions.setSongList(hahaha23));
-        const randomSong = Math.ceil(100 * Math.random());
-        dispatch(actions.setCurrentSong(hahaha23[randomSong]));
+        // 初始化自动播放
+        // const randomSong = Math.ceil(100 * Math.random());
+        // dispatch(actions.setCurrentSong(hahaha23[randomSong]));
       });
     }
   }, []);

@@ -122,6 +122,7 @@ class Main extends React.Component<Props, State> {
             <div className="right-side">
               {/* exact参数，路由是否严格匹配 */}
               <Switch>
+               <Route path="/" component={Music} />
                 <Route path="/music" component={Music} />
                 <Route path="/chat" component={ChatMain} />
                 <Route path="/lifeClock" component={LifeClock} />

@@ -14,6 +14,7 @@ export default () => {
   const songList = useSelector((state: any) => state.songList);
   const dispatch = useDispatch();
   const [playPercent, setPlayPercent] = useState(0);
+  const [volumePercent, setVolumePercent] = useState(0);
   const [currentTime, setcurrentTime] = useState("00:00");
   const [totalTime, settotalTime] = useState("00:00");
   const [playType, setPlayType] = useState(PlayType.List);
@@ -23,6 +24,10 @@ export default () => {
     // 同步一下歌词
     dispatch(actions.setMusicTime(myAudio.currentTime));
   };
+  const volumeDragEnd = (percent: number) => {
+    const myAudio: any = document.getElementById("unique-audio");
+    myAudio.volume = percent;
+  };
   useEffect(() => {
     // 渲染完后才允许调用
     const myAudio: any = document.getElementById("unique-audio");
@@ -30,6 +35,8 @@ export default () => {
       myAudio.oncanplay = () => {
         console.log(myAudio.duration.toString());
         settotalTime(formatTime(myAudio.duration));
+        setVolumePercent(0.5);
+        myAudio.volume = 0.5;
       };
       myAudio.ontimeupdate = (event: any) => {
         const currentTime = Math.round(event.target.currentTime);
@@ -79,11 +86,13 @@ export default () => {
         });
         // 本地路径
         hahaha23[0].url = `node/localMusic/a.mp3`;
-        // 初始化自动播放
         dispatch(actions.setSongList(hahaha23));
-        const randomSong = Math.ceil(100 * Math.random());
-        dispatch(actions.setCurrentSong(hahaha23[randomSong]));
       });
+    }
+    if (currentSong.songid === "") {
+      // 初始化自动播放
+      const randomSong = Math.ceil(100 * Math.random());
+      dispatch(actions.setCurrentSong(songList[randomSong]));
     }
     if ((myAudio as any).paused) {
       setcurrentState(true);
@@ -188,6 +197,13 @@ export default () => {
         </div>
         <div className="music-play-row-right">
           <i className="iconfont icon-music-voice"></i>
+          <div style={{ width: "100px" }}>
+            <Progress
+              percent={volumePercent}
+              percentProgress={50}
+              dragEnd={volumeDragEnd}
+            />
+          </div>
         </div>
       </div>
     </div>
