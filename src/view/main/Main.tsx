@@ -1,4 +1,4 @@
-import { Avatar, Button, Drawer, Icon, Menu } from "antd";
+import { Avatar, Drawer, Icon, Menu } from "antd";
 import * as React from "react";
 // BrowserRouter as Router(也可以用)
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -9,10 +9,10 @@ import LifeClock from "../lifeClock/LifeClock";
 import Moment from "../moment/Moment";
 import WriteMoment from "../moment/WriteMoment";
 import Music from "../music/Music";
+import MusicBar from "../music/MusicBar";
 import PhotoMain from "../photo/photoMain";
 import ChatMain from "./../chat/Chat";
 import "./main.less";
-import MusicBar from "../music/MusicBar";
 
 interface IItem {
   id: string;
@@ -107,7 +107,10 @@ class Main extends React.Component<Props, State> {
             </div>
           </Drawer>
           <div className="main-container">
-            <div className="left-side">
+            <div
+              className="left-side"
+              style={this.state.collapsed ? { display: "none" } : null}
+            >
               <Menu
                 onClick={this.handleClick2}
                 defaultSelectedKeys={["1"]}
@@ -122,7 +125,7 @@ class Main extends React.Component<Props, State> {
             <div className="right-side">
               {/* exact参数，路由是否严格匹配 */}
               <Switch>
-               <Route path="/" component={Music} />
+                <Route exact path="/" component={Music} />
                 <Route path="/music" component={Music} />
                 <Route path="/chat" component={ChatMain} />
                 <Route path="/lifeClock" component={LifeClock} />

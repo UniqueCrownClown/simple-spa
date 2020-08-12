@@ -21,13 +21,13 @@ export default () => {
     if (songList.length <= 0) {
       // 路由切回来不重新请求
       getList().then(async (res: any) => {
-        const hahaha23 = res.data.map((item) => {
+        const hahaha23 = res && res.data.map((item) => {
           item.show = true;
           item.url = `http://jaymusic.gitee.io/jaymusic${item.path}`;
           return item;
         });
         // 本地路径
-        hahaha23[0].url = `node/localMusic/a.mp3`;
+        // hahaha23[0].url = `node/localMusic/a.mp3`;
         dispatch(actions.setSongList(hahaha23));
         // 初始化自动播放
         // const randomSong = Math.ceil(100 * Math.random());
