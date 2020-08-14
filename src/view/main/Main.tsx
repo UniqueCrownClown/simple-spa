@@ -1,7 +1,6 @@
 import { Avatar, Drawer, Icon, Menu } from "antd";
 import * as React from "react";
-// BrowserRouter as Router(也可以用)
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import ArticleCom from "../cnode/ArticleCom";
 import MainSec from "../cnode/MainSec";
 import UserCom from "../cnode/UserCom";
@@ -63,86 +62,84 @@ class Main extends React.Component<Props, State> {
   public render() {
     const { topMenu, leftMenu } = this.state;
     return (
-      <Router>
-        <div className="treasure-main">
-          <div className="treasure-header">
-            <Icon
-              type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-              onClick={this.toggleCollapsed}
-              style={{ fontSize: "24px", color: "#fff" }}
-            />
-            <div className="treasure-header-title">Moment</div>
-            <Icon
-              type="menu-fold"
-              style={{ fontSize: "24px", color: "#fff" }}
-              onClick={this.showDrawer}
-            />
-          </div>
-          {topMenu.length > 0 ? (
-            <Menu
-              onClick={this.handleClick}
-              selectedKeys={[this.state.current]}
-              mode="horizontal"
-            >
-              {topMenu.map((item) => (
-                <Menu.Item key={item.id}>{item.label}</Menu.Item>
-              ))}
-            </Menu>
-          ) : null}
-          <Drawer
-            title="菜单列表"
-            placement="right"
-            closable={false}
-            onClose={this.onClose}
-            visible={this.state.visible}
-            width={200}
+      <div className="treasure-main">
+        <div className="treasure-header">
+          <Icon
+            type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
+            onClick={this.toggleCollapsed}
+            style={{ fontSize: "24px", color: "#fff" }}
+          />
+          <div className="treasure-header-title">Moment</div>
+          <Icon
+            type="menu-fold"
+            style={{ fontSize: "24px", color: "#fff" }}
+            onClick={this.showDrawer}
+          />
+        </div>
+        {topMenu.length > 0 ? (
+          <Menu
+            onClick={this.handleClick}
+            selectedKeys={[this.state.current]}
+            mode="horizontal"
           >
-            <div className="drawer-content">
-              <div>
-                <Avatar size={64} icon="user" />
-              </div>
-              <div>设置</div>
-              <div>关于</div>
-              <div>退出</div>
+            {topMenu.map((item) => (
+              <Menu.Item key={item.id}>{item.label}</Menu.Item>
+            ))}
+          </Menu>
+        ) : null}
+        <Drawer
+          title="菜单列表"
+          placement="right"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
+          width={200}
+        >
+          <div className="drawer-content">
+            <div>
+              <Avatar size={64} icon="user" />
             </div>
-          </Drawer>
-          <div className="main-container">
-            <div
-              className="left-side"
-              style={this.state.collapsed ? { display: "none" } : null}
-            >
-              <Menu
-                onClick={this.handleClick2}
-                defaultSelectedKeys={["1"]}
-                mode="inline"
-                inlineCollapsed={this.state.collapsed}
-              >
-                {leftMenu.map((item) => {
-                  return this.renderMenu(item);
-                })}
-              </Menu>
-            </div>
-            <div className="right-side">
-              {/* exact参数，路由是否严格匹配 */}
-              <Switch>
-                <Route exact path="/" component={Music} />
-                <Route path="/music" component={Music} />
-                <Route path="/chat" component={ChatMain} />
-                <Route path="/lifeClock" component={LifeClock} />
-                <Route path="/moment" component={Moment} />
-                <Route path="/writemoment" component={WriteMoment} />
-                <Route path="/cnode" exact={true} component={MainSec} />
-                <Route path="/photo" component={PhotoMain} />
-                <Route path="/topic/:id" component={ArticleCom} />
-                <Route path="/@:username/users" component={UserCom} />
-              </Switch>
-            </div>
+            <div>设置</div>
+            <div>关于</div>
+            <div>退出</div>
           </div>
-          <div className="treasure-footer">
-            <MusicBar />
+        </Drawer>
+        <div className="main-container">
+          <div
+            className="left-side"
+            style={this.state.collapsed ? { display: "none" } : null}
+          >
+            <Menu
+              onClick={this.handleClick2}
+              defaultSelectedKeys={["1"]}
+              mode="inline"
+              inlineCollapsed={this.state.collapsed}
+            >
+              {leftMenu.map((item) => {
+                return this.renderMenu(item);
+              })}
+            </Menu>
+          </div>
+          <div className="right-side">
+            {/* exact参数，路由是否严格匹配 */}
+            <Switch>
+              <Route exact path="/" component={Music} />
+              <Route path="/music" component={Music} />
+              <Route path="/chat" component={ChatMain} />
+              <Route path="/lifeClock" component={LifeClock} />
+              <Route path="/moment" component={Moment} />
+              <Route path="/writemoment" component={WriteMoment} />
+              <Route path="/cnode" exact={true} component={MainSec} />
+              <Route path="/photo" component={PhotoMain} />
+              <Route path="/topic/:id" component={ArticleCom} />
+              <Route path="/@:username/users" component={UserCom} />
+            </Switch>
           </div>
         </div>
-      </Router>
+        <div className="treasure-footer">
+          <MusicBar />
+        </div>
+      </div>
     );
   }
 

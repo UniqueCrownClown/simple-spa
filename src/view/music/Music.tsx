@@ -1,77 +1,54 @@
 import { Button } from "antd";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../stores/actions";
-import { getList } from "./../../api";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import CurrentList from "./CurrentList";
+import JayList from "./JayList";
+import PlayList from "./PlayList";
 import LyricList from "./LyricList";
 import "./music.less";
-export default () => {
-  const currentSong = useSelector((state: any) => state.currentSong);
-  const songList = useSelector((state: any) => state.songList);
-  const dispatch = useDispatch();
-
-  const playSong = (event: any, songid: string) => {
-    // 歌曲资源托管在码云上
-    dispatch(
-      actions.setCurrentSong(songList.find((item) => item.songid === songid))
-    );
-  };
-  useEffect(() => {
-    // 在组件下一次重新渲染之后执行
-    if (songList.length <= 0) {
-      // 路由切回来不重新请求
-      getList().then(async (res: any) => {
-        const hahaha23 = res && res.data.map((item) => {
-          item.show = true;
-          item.url = `http://jaymusic.gitee.io/jaymusic${item.path}`;
-          return item;
-        });
-        // 本地路径
-        // hahaha23[0].url = `node/localMusic/a.mp3`;
-        dispatch(actions.setSongList(hahaha23));
-        // 初始化自动播放
-        // const randomSong = Math.ceil(100 * Math.random());
-        // dispatch(actions.setCurrentSong(hahaha23[randomSong]));
-      });
-    }
-  }, []);
+import MusicSearch from "./MusicSearch";
+import Recommend from "./Recommend";
+export default (props: any) => {
   return (
     <div className="music-module">
       <div className="music-module-container">
         <div className="music-module-left">
           <div className="music-btn-list">
-            <Button>正在播放</Button>
-            <Button>搜索</Button>
+            <Button
+              type="dashed"
+              onClick={() => props.history.push({ pathname: "/music/current" })}
+            >
+              正在播放
+            </Button>
+            <Button
+              type="dashed"
+              onClick={() =>
+                props.history.push({ pathname: "/music/recommend" })
+              }
+            >
+              推荐
+            </Button>
+            <Button
+              type="dashed"
+              onClick={() => props.history.push({ pathname: "/music/search" })}
+            >
+              搜索
+            </Button>
+            <Button
+              type="dashed"
+              onClick={() => props.history.push({ pathname: "/music/jay" })}
+            >
+              jayList
+            </Button>
           </div>
-          <div className="music-player-list">
-            <div className="music-player-list-header">
-              <span>歌曲</span>
-              <span>歌手</span>
-            </div>
-            {songList.map((item) => (
-              <div
-                className={
-                  currentSong === item
-                    ? "music-player-list-item active"
-                    : "music-player-list-item "
-                }
-                key={item.songid}
-                onClick={(event) => playSong(event, item.songid)}
-              >
-                {currentSong === item ? (
-                  <span>
-                    <img
-                      className="music-playing-icon"
-                      src={require("../../assets/images/playing.svg")}
-                    />
-                    {item.title}
-                  </span>
-                ) : (
-                  <span>{item.title}</span>
-                )}
-                <span>{item.author}</span>
-              </div>
-            ))}
+          <div className="music-player-container">
+            <Switch>
+              <Route path="/music/current" component={CurrentList} />
+              <Route path="/music/search" component={MusicSearch} />
+              <Route path="/music/jay" component={JayList} />
+              <Route path="/music/recommend" component={Recommend} />
+              <Route path="/music/playlist/:id" component={PlayList} />
+            </Switch>
           </div>
         </div>
         <LyricList />
