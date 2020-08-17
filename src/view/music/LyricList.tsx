@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { lrc } from "./lrcUtil";
+import { transformLrc } from "./lrcUtil";
 
 export default () => {
   const musicTime = useSelector((state: any) => state.musicTime);
@@ -8,7 +8,7 @@ export default () => {
   const [lrcData, setLrcData] = useState([]);
 
   useEffect(() => {
-    lrc(currentSong.songid).then((lrcData) => {
+    transformLrc(currentSong.songid,currentSong.type).then((lrcData) => {
       setLrcData(lrcData);
     });
   }, [currentSong]);

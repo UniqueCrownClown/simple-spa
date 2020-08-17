@@ -1,12 +1,13 @@
 import { Button } from "antd";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import CacheRoute, { CacheSwitch } from "react-router-cache-route";
+import { Route } from "react-router-dom";
 import CurrentList from "./CurrentList";
 import JayList from "./JayList";
-import PlayList from "./PlayList";
 import LyricList from "./LyricList";
 import "./music.less";
 import MusicSearch from "./MusicSearch";
+import PlayList from "./PlayList";
 import Recommend from "./Recommend";
 export default (props: any) => {
   return (
@@ -42,13 +43,13 @@ export default (props: any) => {
             </Button>
           </div>
           <div className="music-player-container">
-            <Switch>
+            <CacheSwitch>
               <Route path="/music/current" component={CurrentList} />
-              <Route path="/music/search" component={MusicSearch} />
-              <Route path="/music/jay" component={JayList} />
-              <Route path="/music/recommend" component={Recommend} />
+              <CacheRoute path="/music/search" component={MusicSearch} />
+              <CacheRoute path="/music/jay" component={JayList} />
+              <CacheRoute path="/music/recommend" component={Recommend} />
               <Route path="/music/playlist/:id" component={PlayList} />
-            </Switch>
+            </CacheSwitch>
           </div>
         </div>
         <LyricList />

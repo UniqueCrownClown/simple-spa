@@ -1,10 +1,10 @@
 import { getLrc } from "src/api";
-export const lrc = async (songid: string) => {
-    if (songid && songid !== "") {
+export const transformLrc = async (songid: string, type?: string) => {
+    const hahahx = [];
+    if (songid && songid !== "" && type) {
         const res: any = await getLrc(songid);
         if (res && res.data) {
             const src = formatLrc(res.data.lrc);
-            const hahahx = [];
             for (const prop in src) {
                 if (src.hasOwnProperty(prop)) {
                     // 继续操作prop和obj
@@ -17,8 +17,9 @@ export const lrc = async (songid: string) => {
             }
             return hahahx
         }
-    }
 
+    }
+    return hahahx
 };
 const formatLrc = (str: string) => {
     const lrcObj = {};

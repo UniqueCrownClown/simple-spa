@@ -21,7 +21,7 @@ export default (props: any) => {
             <span>
               <img
                 className="music-playing-icon"
-                src={require("../../assets/images/playing.svg")}
+                src={require("../../../assets/images/playing.svg")}
               />
               {item.title}
             </span>
