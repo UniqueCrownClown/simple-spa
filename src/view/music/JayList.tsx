@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MusicList from "./musicList";
 import { useSelector, useDispatch } from "react-redux";
 import { getList } from "src/api";
-import * as actions from "../../stores/actions";
+import { setCurrentSong } from "../../stores/actions";
 export default () => {
   const currentSong = useSelector((state: any) => state.currentSong);
-  const songList = useSelector((state: any) => state.songList);
+  const [songList, setSongList] = useState([]);
   const dispatch = useDispatch();
 
   const playSong = (event: any, songid: string) => {
     // 歌曲资源托管在码云上
-    dispatch(
-      actions.setCurrentSong(songList.find((item) => item.songid === songid))
-    );
+    dispatch(setCurrentSong(songList.find((item) => item.songid === songid)));
   };
+
   useEffect(() => {
     // 在组件下一次重新渲染之后执行
     if (songList.length <= 0) {
@@ -29,12 +28,8 @@ export default () => {
         // 本地路径
         // hahaha23[0].url = `node/localMusic/a.mp3`;
         if (hahaha23.length > 0) {
-          dispatch(actions.setSongList(hahaha23));
+          setSongList(hahaha23);
         }
-
-        // 初始化自动播放
-        // const randomSong = Math.ceil(100 * Math.random());
-        // dispatch(actions.setCurrentSong(hahaha23[randomSong]));
       });
     }
   }, []);

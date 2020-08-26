@@ -47,7 +47,6 @@ export default (props) => {
         {officialList.map((item) => (
           <div
             className="row-item"
-            style={{ width: "20%"}}
             onClick={() => {
               props.history.push({
                 pathname: `/music/playlist/${item.id}`,

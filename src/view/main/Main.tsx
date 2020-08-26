@@ -123,16 +123,32 @@ class Main extends React.Component<Props, State> {
           <div className="right-side">
             {/* exact参数，路由是否严格匹配 */}
             <Switch>
-              <Route exact path="/" component={Music} />
-              <Route path="/music" component={Music} />
+              <Route
+                exact
+                path="/"
+                component={(props) => <Music {...props} />}
+              />
+              <Route
+                path="/music"
+                component={(props) => <Music {...props} />}
+              />
               <Route path="/chat" component={ChatMain} />
-              <Route path="/lifeClock" component={LifeClock} />
+              <Route
+                path="/lifeClock"
+                component={(props) => <LifeClock {...props} />}
+              />
               <Route path="/moment" component={Moment} />
               <Route path="/writemoment" component={WriteMoment} />
               <Route path="/cnode" exact={true} component={MainSec} />
               <Route path="/photo" component={PhotoMain} />
-              <Route path="/topic/:id" component={ArticleCom} />
-              <Route path="/@:username/users" component={UserCom} />
+              <Route
+                path="/topic/:id"
+                component={(props) => <ArticleCom {...props} />}
+              />
+              <Route
+                path="/@:username/users"
+                component={(props) => <UserCom {...props} />}
+              />
             </Switch>
           </div>
         </div>

@@ -1,6 +1,4 @@
-// import * as actions from "../../stores/actions";
 import { connect } from "react-redux";
-// import { Dispatch } from "redux";
 import { StoreState } from "../../stores/typing";
 
 import * as React from "react";

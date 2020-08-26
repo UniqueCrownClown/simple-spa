@@ -1,5 +1,5 @@
 import * as constants from "./constants";
-
+const Storage = window.localStorage;
 export interface IncrementEnthusiasm {
   type: constants.INCREMENT_ENTHUSIASM;
 }
@@ -43,14 +43,18 @@ export function setMusicTime(payload: any): any {
     musicTime: payload,
   };
 }
-export function setSongList(payload: any): any {
+export function setGlobalSongList(payload: any): any {
   return {
-    type: 'setSongList',
-    songList: payload
+    type: 'setGlobalSongList',
+    globalSongList: payload
   }
 }
 
 export function setCurrentSong(payload: any): any {
+  const historyList = Storage.getItem("history_music_list");
+  const tempList = JSON.parse(historyList) ? JSON.parse(historyList).filter(item => item.songid !== payload.songid) : [];
+
+  Storage.setItem("history_music_list", JSON.stringify([payload, ...tempList]));
   return {
     type: 'setCurrentSong',
     currentSong: payload

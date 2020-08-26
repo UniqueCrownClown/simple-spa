@@ -4,5 +4,5 @@ export interface StoreState {
   userBirthday: string;
   musicTime:any;
   currentSong: any;
-  songList:any
+  globalSongList:any
 }

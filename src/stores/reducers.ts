@@ -29,10 +29,10 @@ export function enthusiasm(
           ...state,
           currentSong: (action as any).currentSong
         };
-        case "setSongList":
+        case "setGlobalSongList":
           return {
             ...state,
-            songList: (action as any).songList
+            globalSongList: (action as any).globalSongList
           };
   }
   return state;

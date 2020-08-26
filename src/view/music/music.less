@@ -14,56 +14,14 @@
 
       .music-btn-list {
         text-align: left;
-        margin: 10px;
+        margin: 0 10px;
         button {
-            margin: 0 20px;
+            margin: 10px 20px;
         }
       }
       .music-player-container {
         height: calc(~"100vh - 200px");
         overflow: auto;
-      }
-      .music-player-list {
-        .music-player-list-header {
-          display: flex;
-          justify-content: space-between;
-          color: #e5e5e5;
-          height: 40px;
-          line-height: 40px;
-
-          & > span {
-            padding: 0 20px;
-          }
-        }
-
-        .music-player-list-item {
-          display: flex;
-          justify-content: space-between;
-          color: #ffffff;
-          height: 40px;
-          line-height: 40px;
-          border-bottom: 1px solid #e5e5e5;
-          cursor: pointer;
-
-          .music-playing-icon {
-            width: 20px;
-            height: 20px;
-            animation: blink 1s infinite;
-            margin-right: 10px;
-          }
-
-          &.active {
-            background-color: rgba(255, 255, 255, 0.6);
-          }
-
-          & > span {
-            padding: 0 20px;
-          }
-
-          &:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-          }
-        }
       }
     }
 

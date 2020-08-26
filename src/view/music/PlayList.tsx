@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MusicList from "./musicList";
 import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../stores/actions";
 import { getPlaylistDetail } from "src/api/NeteaseCloudMusicApi";
+import { setCurrentSong } from "src/stores/actions";
 export default (props: any) => {
   const currentSong = useSelector((state: any) => state.currentSong);
   const [songList, setSongList] = useState([]);
@@ -13,7 +13,7 @@ export default (props: any) => {
   const playSong = (event: any, songid: string) => {
     // 歌曲资源托管在码云上
     dispatch(
-      actions.setCurrentSong(songList.find((item) => item.songid === songid))
+      setCurrentSong(songList.find((item) => item.songid === songid))
     );
   };
   useEffect(() => {

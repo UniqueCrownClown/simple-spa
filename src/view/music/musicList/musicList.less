@@ -1,0 +1,58 @@
+.music-player-list {
+  .music-player-list-header {
+    display: flex;
+    justify-content: space-between;
+    color: #e5e5e5;
+    height: 40px;
+    line-height: 40px;
+
+    & > span:nth-child(1) {
+      padding: 0 20px;
+    }
+    & > span:nth-child(2) {
+      padding: 0 60px;
+    }
+  }
+
+  .music-player-list-item {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: pointer;
+    position: relative;
+    .music-playing-icon {
+      width: 20px;
+      height: 20px;
+      animation: blink 1s infinite;
+      margin-right: 10px;
+    }
+    .closeWrap {
+      position: absolute;
+      right: 20px;
+      align-self: center;
+      cursor: pointer;
+      display: none;
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    & > span:nth-child(1) {
+      padding: 0 20px;
+    }
+    & > span:nth-child(2) {
+      padding: 0 60px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    &:hover .closeWrap{
+        display: flex;
+    }
+  }
+}

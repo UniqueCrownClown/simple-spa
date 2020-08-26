@@ -1,5 +1,6 @@
 import React from "react";
-
+import { CloseCircleOutlined } from "@ant-design/icons";
+import "./musicList.less";
 export default (props: any) => {
   return (
     <div className="music-player-list">
@@ -29,6 +30,8 @@ export default (props: any) => {
             <span>{item.title}</span>
           )}
           <span>{item.author}</span>
+          {props.isRemove ? <div className="closeWrap" onClick={(event) =>props.closeSong(event, item.songid)}>
+            <CloseCircleOutlined style={{ fontSize: '24px' }} /> </div>: null}
         </div>
       ))}
     </div>

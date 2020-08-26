@@ -9,6 +9,7 @@ import "./music.less";
 import MusicSearch from "./MusicSearch";
 import PlayList from "./PlayList";
 import Recommend from "./Recommend";
+import HearedList from "./HearedList";
 export default (props: any) => {
   return (
     <div className="music-module">
@@ -39,7 +40,13 @@ export default (props: any) => {
               type="dashed"
               onClick={() => props.history.push({ pathname: "/music/jay" })}
             >
-              jayList
+              周杰伦歌单
+            </Button>
+            <Button
+              type="dashed"
+              onClick={() => props.history.push({ pathname: "/music/heared" })}
+            >
+              我听过的
             </Button>
           </div>
           <div className="music-player-container">
@@ -47,8 +54,15 @@ export default (props: any) => {
               <Route path="/music/current" component={CurrentList} />
               <CacheRoute path="/music/search" component={MusicSearch} />
               <CacheRoute path="/music/jay" component={JayList} />
-              <CacheRoute path="/music/recommend" component={Recommend} />
-              <Route path="/music/playlist/:id" component={PlayList} />
+              <CacheRoute path="/music/heared" component={HearedList} />
+              <CacheRoute
+                path="/music/recommend"
+                component={(props) => <Recommend {...props} />}
+              />
+              <Route
+                path="/music/playlist/:id"
+                component={(props) => <PlayList {...props} />}
+              />
             </CacheSwitch>
           </div>
         </div>

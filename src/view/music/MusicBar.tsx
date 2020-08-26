@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../stores/actions";
 import Progress from "./../../components/progress/progress";
 import "./musicBar.less";
 import { getList } from "src/api";
+import {
+  setMusicTime,
+  setCurrentSong,
+  setGlobalSongList,
+} from "src/stores/actions";
 enum PlayType {
   Single,
   Random,
@@ -11,7 +15,7 @@ enum PlayType {
 }
 export default () => {
   const currentSong = useSelector((state: any) => state.currentSong);
-  const songList = useSelector((state: any) => state.songList);
+  const songList = useSelector((state: any) => state.globalSongList);
   const dispatch = useDispatch();
   const [playPercent, setPlayPercent] = useState(0);
   const [volumePercent, setVolumePercent] = useState(0);
@@ -22,7 +26,7 @@ export default () => {
     const myAudio: any = document.getElementById("unique-audio");
     myAudio.currentTime = getSecond(totalTime) * percent;
     // 同步一下歌词
-    dispatch(actions.setMusicTime(myAudio.currentTime));
+    dispatch(setMusicTime(myAudio.currentTime));
   };
   const volumeDragEnd = (percent: number) => {
     const myAudio: any = document.getElementById("unique-audio");
@@ -33,7 +37,7 @@ export default () => {
     const myAudio: any = document.getElementById("unique-audio");
     if (myAudio) {
       myAudio.oncanplay = () => {
-        console.log(myAudio.duration.toString());
+        // console.log(myAudio.duration.toString());
         settotalTime(formatTime(myAudio.duration));
         setVolumePercent(0.5);
         myAudio.volume = 0.5;
@@ -41,7 +45,7 @@ export default () => {
       myAudio.ontimeupdate = (event: any) => {
         const currentTime = Math.round(event.target.currentTime);
 
-        dispatch(actions.setMusicTime(currentTime));
+        dispatch(setMusicTime(currentTime));
         // 设置进度条
         setPlayPercent(currentTime / getSecond(totalTime));
         setcurrentTime(formatTime(currentTime));
@@ -56,11 +60,15 @@ export default () => {
     };
   }, [currentSong, totalTime]);
 
+  useEffect(() => {
+    if (currentSong && currentSong.songid !== "") {
+      setcurrentState(true);
+    }
+  }, [currentSong]);
+
   const playSong = (event: any, songid: string) => {
     // 歌曲资源托管在码云上
-    dispatch(
-      actions.setCurrentSong(songList.find((item) => item.songid === songid))
-    );
+    dispatch(setCurrentSong(songList.find((item) => item.songid === songid)));
   };
 
   //顺序播放
@@ -86,13 +94,13 @@ export default () => {
         });
         // 本地路径
         hahaha23[0].url = `node/localMusic/a.mp3`;
-        dispatch(actions.setSongList(hahaha23));
+        dispatch(setGlobalSongList(hahaha23));
       });
     }
     if (currentSong.songid === "") {
       // 初始化自动播放
       const randomSong = Math.ceil(100 * Math.random());
-      dispatch(actions.setCurrentSong(songList[randomSong]));
+      dispatch(setCurrentSong(songList[randomSong]));
     }
     if ((myAudio as any).paused) {
       setcurrentState(true);
