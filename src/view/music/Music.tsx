@@ -18,49 +18,49 @@ export default (props: any) => {
           <div className="music-btn-list">
             <Button
               type="dashed"
-              onClick={() => props.history.push({ pathname: "/music/current" })}
+              onClick={() => props.history.push({ pathname: "/simple-spa/music/current" })}
             >
               正在播放
             </Button>
             <Button
               type="dashed"
               onClick={() =>
-                props.history.push({ pathname: "/music/recommend" })
+                props.history.push({ pathname: "/simple-spa/music/recommend" })
               }
             >
               推荐
             </Button>
             <Button
               type="dashed"
-              onClick={() => props.history.push({ pathname: "/music/search" })}
+              onClick={() => props.history.push({ pathname: "/simple-spa/music/search" })}
             >
               搜索
             </Button>
             <Button
               type="dashed"
-              onClick={() => props.history.push({ pathname: "/music/jay" })}
+              onClick={() => props.history.push({ pathname: "/simple-spa/music/jay" })}
             >
               周杰伦歌单
             </Button>
             <Button
               type="dashed"
-              onClick={() => props.history.push({ pathname: "/music/heared" })}
+              onClick={() => props.history.push({ pathname: "/simple-spa/music/heared" })}
             >
               我听过的
             </Button>
           </div>
           <div className="music-player-container">
             <CacheSwitch>
-              <Route path="/music/current" component={CurrentList} />
-              <CacheRoute path="/music/search" component={MusicSearch} />
-              <CacheRoute path="/music/jay" component={JayList} />
-              <CacheRoute path="/music/heared" component={HearedList} />
+              <Route path="/simple-spa/current" component={CurrentList} exact={true}/>
+              <CacheRoute path="/simple-spa/music/search" component={MusicSearch} />
+              <CacheRoute path="/simple-spa/music/jay" component={JayList} exact={true}/>
+              <CacheRoute path="/simple-spa/music/heared" component={HearedList} />
               <CacheRoute
-                path="/music/recommend"
+                path="/simple-spa/music/recommend"
                 component={(props) => <Recommend {...props} />}
               />
-              <Route
-                path="/music/playlist/:id"
+              <CacheRoute
+                path="/simple-spa/music/playlist/:id"
                 component={(props) => <PlayList {...props} />}
               />
             </CacheSwitch>

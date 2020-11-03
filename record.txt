@@ -111,4 +111,28 @@ package.json
 	怎么把音乐这个component一直挂载在后台？？
 	放到main.tsx上？？？
 	
-		
+
+
+	200910
+		task
+			```````````
+			引入dva? ? ?
+
+			简单页面对接server的接口？？
+
+			看回之前的md回顾？？
+
+			```````````
+
+
+
+子项目的路由怎么作兼容？？？？
+
+
+
+8080/simple-spa转到localhost:3000/subapp/simple-spa/
+single-spa都挂在一个path下？？
+
+localhost:3000/subapp/simple-spa/
+
+8080/simple-spa

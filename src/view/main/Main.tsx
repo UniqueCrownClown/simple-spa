@@ -1,16 +1,9 @@
 import { Avatar, Drawer, Icon, Menu } from "antd";
 import * as React from "react";
 import { Link, Route, Switch } from "react-router-dom";
-import ArticleCom from "../cnode/ArticleCom";
-import MainSec from "../cnode/MainSec";
-import UserCom from "../cnode/UserCom";
-import LifeClock from "../lifeClock/LifeClock";
-import Moment from "../moment/Moment";
-import WriteMoment from "../moment/WriteMoment";
-import Music from "../music/Music";
+
 import MusicBar from "../music/MusicBar";
-import PhotoMain from "../photo/photoMain";
-import ChatMain from "./../chat/Chat";
+
 import "./main.less";
 
 interface IItem {
@@ -27,6 +20,7 @@ interface TopMenuItem {
 interface Props {
   location: any;
   match: any;
+  children: any;
 }
 interface State {
   visible: boolean;
@@ -42,28 +36,28 @@ class Main extends React.Component<Props, State> {
     super(props);
     this.state = {
       visible: false,
-      current: "mail",
+      current: "main",
       leftMenu: [
         //   {
         //   id: '1', label: '留言', iconType: 'mail', children:
         //     [{ id: '1-1', label: '1-1', link: '/moment' },
         //     { id: '1-2', label: '1-2', link: '/writemoment' }]
         // },
-        { id: "2", label: "聊天", link: "/chat" },
-        { id: "3", label: "音乐", link: "/music" },
-        { id: "4", label: "生辰", link: "/lifeClock" },
-        { id: "5", label: "照片", link: "/photo" },
-        { id: "6", label: "cnode", link: "/cnode" },
+        // { id: "2", label: "聊天", link: "/chat" },
+        { id: "3", label: "音乐", link: "/simple-spa/music" },
+        { id: "4", label: "生辰", link: "/simple-spa/lifeClock" },
+        { id: "5", label: "瀑布流", link: "/simple-spa/photo" },
+        // { id: "6", label: "cnode", link: "/cnode" },
       ],
       topMenu: [],
-      collapsed: true,
+      collapsed: false,
     };
   }
   public render() {
     const { topMenu, leftMenu } = this.state;
     return (
       <div className="treasure-main">
-        <div className="treasure-header">
+        <div className="treasure-header" style={{ display: "none" }}>
           <Icon
             type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
             onClick={this.toggleCollapsed}
@@ -87,7 +81,7 @@ class Main extends React.Component<Props, State> {
             ))}
           </Menu>
         ) : null}
-        <Drawer
+        {/* <Drawer
           title="菜单列表"
           placement="right"
           closable={false}
@@ -103,7 +97,7 @@ class Main extends React.Component<Props, State> {
             <div>关于</div>
             <div>退出</div>
           </div>
-        </Drawer>
+        </Drawer> */}
         <div className="main-container">
           <div
             className="left-side"
@@ -120,37 +114,7 @@ class Main extends React.Component<Props, State> {
               })}
             </Menu>
           </div>
-          <div className="right-side">
-            {/* exact参数，路由是否严格匹配 */}
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={(props) => <Music {...props} />}
-              />
-              <Route
-                path="/music"
-                component={(props) => <Music {...props} />}
-              />
-              <Route path="/chat" component={ChatMain} />
-              <Route
-                path="/lifeClock"
-                component={(props) => <LifeClock {...props} />}
-              />
-              <Route path="/moment" component={Moment} />
-              <Route path="/writemoment" component={WriteMoment} />
-              <Route path="/cnode" exact={true} component={MainSec} />
-              <Route path="/photo" component={PhotoMain} />
-              <Route
-                path="/topic/:id"
-                component={(props) => <ArticleCom {...props} />}
-              />
-              <Route
-                path="/@:username/users"
-                component={(props) => <UserCom {...props} />}
-              />
-            </Switch>
-          </div>
+          <div className="right-side">{this.props.children}</div>
         </div>
         <div className="treasure-footer">
           <MusicBar />

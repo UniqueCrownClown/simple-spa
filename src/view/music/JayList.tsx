@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import MusicList from "./musicList";
 import { useSelector, useDispatch } from "react-redux";
 import { getList } from "src/api";
-import { setCurrentSong } from "../../stores/actions";
+import { setCurrentSong, setGlobalSongList } from "../../stores/actions";
 export default () => {
   const currentSong = useSelector((state: any) => state.currentSong);
-  const [songList, setSongList] = useState([]);
+  // const [songList, setSongList] = useState([]);
+  const songList = useSelector((state: any) => state.globalSongList);
   const dispatch = useDispatch();
 
   const playSong = (event: any, songid: string) => {
@@ -28,7 +29,7 @@ export default () => {
         // 本地路径
         // hahaha23[0].url = `node/localMusic/a.mp3`;
         if (hahaha23.length > 0) {
-          setSongList(hahaha23);
+          dispatch(setGlobalSongList(hahaha23));
         }
       });
     }
