@@ -49,7 +49,7 @@ export default (props) => {
             className="row-item"
             onClick={() => {
               props.history.push({
-                pathname: `/music/playlist/${item.id}`,
+                pathname: `/simple-spa/music/playlist/${item.id}`,
               });
             }}
             key={item.id}
@@ -90,7 +90,7 @@ export default (props) => {
             className="column-item"
             onClick={() => {
               props.history.push({
-                pathname: `/music/playlist/${item.id}`,
+                pathname: `/simple-spa/music/playlist/${item.id}`,
               });
             }}
             key={item.id}

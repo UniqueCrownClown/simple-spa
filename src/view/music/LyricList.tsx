@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { transformLrc } from "./lrcUtil";
 
-export default () => {
+export default (props: any) => {
   const musicTime = useSelector((state: any) => state.musicTime);
   const currentSong = useSelector((state: any) => state.currentSong);
   const [lrcData, setLrcData] = useState([]);
@@ -26,7 +26,7 @@ export default () => {
   }, [musicTime]);
 
   return (
-    <div className="music-module-right">
+    <div className="music-module-right" style={props.style}>
       <div className="music-pic">
         <img src={String((currentSong as any).pic)} alt="" />
       </div>

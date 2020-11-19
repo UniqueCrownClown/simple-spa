@@ -1,9 +1,8 @@
 .photo-show-main {
   display: flex;
+  flex-direction: column;
   height: 100%;
   .photo-show-left {
-    width: 120px;
-    height: 100%;
     border-right: 1px solid #e5e5e5;
     .photo-show-kinds {
       .photo-show-kinds-item {
@@ -25,7 +24,6 @@
   }
   .photo-show-right {
     flex: 1;
-    height: 100%;
     overflow: auto;
     .photo-show-img-container {
       column-count: 3;

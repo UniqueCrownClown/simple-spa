@@ -3,7 +3,15 @@ import MusicList from "./musicList";
 import { useSelector, useDispatch } from "react-redux";
 import { getList } from "src/api";
 import { setCurrentSong, setGlobalSongList } from "../../stores/actions";
-export default () => {
+export default (props:any) => {
+  const componentDidCache = () =>{
+    console.log("componentDidCache")
+  }
+  const componentDidRecover = () =>{
+    console.log("componentDidRecover")
+  }
+  props.cacheLifecycles.didCache(componentDidCache)
+  props.cacheLifecycles.didRecover(componentDidRecover)
   const currentSong = useSelector((state: any) => state.currentSong);
   // const [songList, setSongList] = useState([]);
   const songList = useSelector((state: any) => state.globalSongList);
@@ -16,7 +24,7 @@ export default () => {
 
   useEffect(() => {
     // 在组件下一次重新渲染之后执行
-    if (songList.length <= 0) {
+    // if (songList.length <= 0) {
       // 路由切回来不重新请求
       getList().then(async (res: any) => {
         const hahaha23 =
@@ -32,8 +40,9 @@ export default () => {
           dispatch(setGlobalSongList(hahaha23));
         }
       });
-    }
+    // }
   }, []);
+
   return (
     <div>
       <MusicList

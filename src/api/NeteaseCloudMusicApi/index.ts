@@ -43,11 +43,34 @@ export function getTopPlaylist(page = 0, limit = defaultLimit, order = 'hot') {
 
 //获取歌单详情
 export function getPlaylistDetail(id) {
-    const url = `${URL}/playlist/detail`
-    return axios.get(url, {
-        params: {
-            id
-        }
+    // const url = `${URL}/playlist/detail`
+    // return axios.get(url, {
+    //     params: {
+    //         id
+    //     }
+    // })
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`${URL}/playlist/detail`, {
+                params: { id }
+            })
+            .then(response => response.data.playlist)
+            .then(playlist => {
+                const { trackIds, tracks } = playlist
+                // 过滤完整歌单 如排行榜
+                if (tracks.length === trackIds.length) {
+                    resolve(playlist.tracks)
+                    return
+                }
+                // 限制歌单详情最大 100
+                const ids = trackIds
+                    .slice(0, 100)
+                    .map(v => v.id)
+                    .toString()
+                getMusicDetail(ids).then((response) => {
+                    resolve(response.data.songs)
+                })
+            })
     })
 }
 

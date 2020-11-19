@@ -84,7 +84,7 @@ class LifeClock extends React.Component<Props, State> {
                 <div>
                   <Clock name="生之钟" type="white" />
                   {birth === "1970-01-01" ? null : <AgeTable birth={birth} />}
-                  {<Button onClick={this.toGetBirth}>选择日期</Button>}
+                  <div><Button onClick={this.toGetBirth}>选择日期</Button></div>
                 </div>
                 <div>
                   <Clock

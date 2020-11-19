@@ -3,7 +3,7 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 import "./musicList.less";
 export default (props: any) => {
   return (
-    <div className="music-player-list">
+    <div className="music-player-list" style={props.style}>
       <div className="music-player-list-header">
         <span>歌曲</span>
         <span>歌手</span>

@@ -28,7 +28,7 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
-    "src/util/syntax.ts",
+    "src/util/syntax.d.ts",
     "src/view/test/",
     "server"
   ]

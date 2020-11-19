@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import "./photoMain.less";
 const photoMain = () => {
-  const [imgSource, setImgSource] = useState(
-    new Array(8).fill(undefined).map((item, index) => {
-      return {
-        id: (100 * Math.random()).toString(),
-        source:  'https://cdn.jsdelivr.net/gh/UniqueCrownClown/pic-bed/img/3f3ee1e67788e49354019f6283f45749.jpg'
-      };
-    })
-  );
+  const [imgSource, setImgSource] = useState([]);
   const [imgKinds, setImgKinds] = useState([
     { id: "123", name: "light" },
     { id: "456", name: "life" },
@@ -19,7 +12,7 @@ const photoMain = () => {
     const name = imgKinds[index].name;
     setActiveType(parseInt(index, 10));
     // 图片路径应该是走ajax下发来的
-    setImgSource(new Array(4).fill(undefined).map((item, index) => {
+    setImgSource(new Array(Math.floor(10*Math.random())).fill(undefined).map((item, index) => {
       return {
         id: (100 * Math.random()).toString(),
         source: 'https://cdn.jsdelivr.net/gh/UniqueCrownClown/pic-bed/img/3f3ee1e67788e49354019f6283f45749.jpg'

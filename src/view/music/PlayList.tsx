@@ -17,9 +17,8 @@ export default (props: any) => {
     );
   };
   useEffect(() => {
-    getPlaylistDetail(props.match.params.id).then((response) => {
-      console.log(response);
-      const  temp = response.data.playlist.tracks.map(item=>{
+    getPlaylistDetail(props.match.params.id).then((response:any) => {
+      const  temp = response.map(item=>{
         return {
           author: item.ar[0].name,
           pic: item.al.picUrl,

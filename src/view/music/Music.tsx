@@ -4,7 +4,6 @@ import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 import { Route } from "react-router-dom";
 import CurrentList from "./CurrentList";
 import JayList from "./JayList";
-import LyricList from "./LyricList";
 import "./music.less";
 import MusicSearch from "./MusicSearch";
 import PlayList from "./PlayList";
@@ -20,7 +19,7 @@ export default (props: any) => {
               type="dashed"
               onClick={() => props.history.push({ pathname: "/simple-spa/music/current" })}
             >
-              正在播放
+              当前播放
             </Button>
             <Button
               type="dashed"
@@ -51,9 +50,9 @@ export default (props: any) => {
           </div>
           <div className="music-player-container">
             <CacheSwitch>
-              <Route path="/simple-spa/current" component={CurrentList} exact={true}/>
+              <CacheRoute path="/simple-spa/music/current" component={(props) => <CurrentList {...props} />} exact={true} />
               <CacheRoute path="/simple-spa/music/search" component={MusicSearch} />
-              <CacheRoute path="/simple-spa/music/jay" component={JayList} exact={true}/>
+              <CacheRoute path="/simple-spa/music/jay" component={(props) => <JayList {...props} />} exact={true} />
               <CacheRoute path="/simple-spa/music/heared" component={HearedList} />
               <CacheRoute
                 path="/simple-spa/music/recommend"
@@ -66,7 +65,6 @@ export default (props: any) => {
             </CacheSwitch>
           </div>
         </div>
-        <LyricList />
       </div>
     </div>
   );
